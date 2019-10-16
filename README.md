@@ -2,4 +2,5 @@
 
 ## Tips
 
-- Execute `bundle install` and failed, remove the Gemfile.lock file and try again
+- We use Ruby 2.5.1 and rails 5.2.x, check it first.
+- Execute `bundle install` and failed, remove the Gemfile.lock file and try again.
