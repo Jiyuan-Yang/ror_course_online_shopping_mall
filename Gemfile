@@ -5,6 +5,7 @@ ruby '2.5.1'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
+gem 'bcrypt'
 
 gem 'rake', '13.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
