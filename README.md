@@ -8,6 +8,12 @@
   - email: string
   - character: string (domin: buyer, seller, administrator)
   - password (use the function from rails, add it later, as well as confirmation)
+- Shop
+  - id: integer
+  - name: string
+  - description: text
+  - rank: float 
+  - **user_id**: integer
 - Product
   - id: integer
   - name: string
@@ -17,17 +23,32 @@
   - type: string
   - color: string
   - size: string (use size format like x\*y\*z) 
-  - shop_id: integer
-- Shop
+  - **shop_id**: integer
+- ShoppingCartItem
   - id: integer
-  - name: string
-  - description: text
-  - rank: float 
-  - user_id: integer
+  - **product_id**: integer
+  - amount: integer
+  - total_price: float
+  - **shopping_cart_id**: integer \#\# test the ShoppingCart character case
 - ShoppingCart
   - id: integer
-  - user_id: integer
-- Order
+  - **user_id**: integer
+  - total_price: float
+- FavoriteItem
+  - id: integer
+  - **product_id**: integer
+  - **favorite_id**: integer \#\# test the ShoppingCart character case
+- Favorite
+  - id: integer
+  - **user_id**: integer
+- OrderItem
+  - id: integer
+  - **product_id**: integer
+  - amount: integer
+  - total_price: float
+  - **buyer_order_id**: integer \#\# test the ShoppingCart character case
+  - **seller_order_id**: integer \#\# test the ShoppingCart character case
+- BuyerOrder
   - id: integer
   - receiver_name: string
   - receiver_address: string
@@ -35,11 +56,16 @@
   - status: string
   - order_time: date
   - total_price: float
-- OrderItem
+  - **user_id**: integer
+- SellerOrder
   - id: integer
-  - product_id: integer
-  - amount: integer
-  - order_id: integer
+  - receiver_name: string
+  - receiver_address: string
+  - receiver_phone_number: string
+  - status: string
+  - order_time: date
+  - total_price: float
+  - **user_id**: integer
 
 ## Tips
 
