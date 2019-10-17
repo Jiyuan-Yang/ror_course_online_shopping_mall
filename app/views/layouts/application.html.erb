@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>the Max Jim's</title>
+  <title><%= yield(:title) + ' | the Max Jim\'s' %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -10,10 +10,10 @@
 </head>
 
 <body>
-  <%= render 'layouts/header' %>
-  <div class="container">
-    <%= yield %>
-    <%= render 'layouts/footer' %>
-  </div>
+<%= render 'layouts/header' %>
+<div class="container">
+  <%= yield %>
+  <%= render 'layouts/footer' %>
+</div>
 </body>
 </html>

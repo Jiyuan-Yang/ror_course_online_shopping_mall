@@ -8,8 +8,9 @@ class User < ApplicationRecord
             format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive: false}
 
-  validates :character, format: {with: /\A(buyer|seller|administrator)\z/}
+  CHARACTERS = %w(buyer seller administrator)
+  validates_inclusion_of :character, :in => CHARACTERS
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: {minimum: 6}
 end
