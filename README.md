@@ -2,6 +2,8 @@
 
 ## Structure
 
+### Model
+
 - User
   - id: integer
   - name: string
@@ -66,6 +68,13 @@
   - order_time: date
   - total_price: float
   - **user_id**: integer
+
+### Controller
+
+- StaticPages
+  - home
+  - about
+  - contact
 
 ## Tips
 
