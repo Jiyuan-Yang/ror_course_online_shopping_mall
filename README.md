@@ -50,16 +50,7 @@
   - total_price: float
   - **buyer_order_id**: integer \#\# test the ShoppingCart character case
   - **seller_order_id**: integer \#\# test the ShoppingCart character case
-- BuyerOrder
-  - id: integer
-  - receiver_name: string
-  - receiver_address: string
-  - receiver_phone_number: string
-  - status: string
-  - order_time: date
-  - total_price: float
-  - **user_id**: integer
-- SellerOrder
+- Order
   - id: integer
   - receiver_name: string
   - receiver_address: string
