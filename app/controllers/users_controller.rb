@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-
+    @user = User.find(params[:id])
   end
 
   def new
@@ -11,7 +11,8 @@ class UsersController < ApplicationController
     # deal with the POST request
     @user = User.new(user_params)
     if @user.save
-
+      flash[:success] = "Welcome to the Max Jim's"
+      redirect_to @user   # equals to `redirect_to user_url(@user)`
     else
       render 'new'
     end
