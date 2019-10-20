@@ -2,29 +2,29 @@
 <h1>Sign up</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: signup_path) do |f| %>
-      <%= render 'shared/error_messages' %>
+    <%= form_for(@user, url: sign_up_path) do |f| %>
+      <%= render 'shared/error_messages', item: @user %>
 
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control'%>
+      <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control'%>
+      <%= f.email_field :email, class: 'form-control' %>
 
       <%= f.label :character %>
-      <%= f.text_field :character, class: 'form-control'%>
+      <%= f.text_field :character, class: 'form-control' %>
       <!--
       <%= select_tag(:city_id, options_for_select(
-          [['buyer: could go shopping on this web mall','buyer'],
-          ['seller: could open your own shops','seller'],
-          ['administrator: have the right to manage every thing', 'administrator']],1)) %>
+      [['buyer: could go shopping on this web mall', 'buyer'],
+       ['seller: could open your own shops', 'seller'],
+       ['administrator: have the right to manage every thing', 'administrator']], 1)) %>
       -->
 
       <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control'%>
+      <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control'%>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>

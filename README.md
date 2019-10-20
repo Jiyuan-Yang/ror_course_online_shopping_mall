@@ -14,7 +14,7 @@
   - id: integer
   - name: string
   - description: text
-  - rank: float 
+  - rank: float             // add after
   - **user_id**: integer
 - Product
   - id: integer
