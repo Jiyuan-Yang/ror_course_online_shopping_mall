@@ -12,7 +12,7 @@
             </a>
             <ul class="dropdown-menu">
               <% if get_user_character == 'seller' %>
-                <li><%= link_to "My Shops", shop_url(current_user) %></li>
+                <li><%= link_to "My Shops", user_shop_path(current_user.id) %></li>
               <% end %>
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", '#' %></li>

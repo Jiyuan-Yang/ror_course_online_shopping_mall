@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  get '/users/:id/user_shop', to: 'users#show_shops', as: 'user_shop'
 
   get '/create_shop', to: 'shops#new'
   post '/create_shop', to: 'shops#create'

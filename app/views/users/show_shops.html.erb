@@ -1,0 +1,12 @@
+<h1>this is the place for user the take a look at there shops</h1>
+<% if @user.shops.count == 0 %>
+  <div>
+    it seems that you don't have any shops,
+    <%= link_to "click here", shops_new_path %> to create you shop!
+  </div>
+<% else %>
+  <% @user.shops.each do |item| %>
+    <div><%= item.id %>|<%= link_to item.name, shop_path(item.id) %>|<%= item.description %></div>
+  <% end %>
+  <div><%= link_to "click here", shops_new_path %> to create you shop!</div>
+<% end %>
