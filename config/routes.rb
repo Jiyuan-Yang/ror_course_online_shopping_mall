@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'products/new'
+  get 'products/show'
   get 'shops/new'
   get 'shops/show'
   get 'sessions/new'
@@ -13,10 +15,15 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/users/:id/user_shop', to: 'users#show_shops', as: 'user_shop'
+  # this is used for sellers to see there shops, for buyer, just use shop id to get shop_path(id)
 
-  get '/create_shop', to: 'shops#new'
-  post '/create_shop', to: 'shops#create'
+  get '/users/:id/create_shop', to: 'shops#new', as: 'create_shop_get'
+  post '/users/:id/create_shop', to: 'shops#create', as: 'create_shop_post'
+
+  get '/shops/:id/create_product', to: 'products#new', as: 'create_product_get'
+  post '/shops/:id/create_product', to: 'products#create', as: 'create_product_post'
 
   resources :users
   resources :shops
+  resources :products
 end

@@ -14,17 +14,17 @@
   - id: integer
   - name: string
   - description: text
-  - rank: float             // add after
+  - rank: float             // add later
   - **user_id**: integer
 - Product
   - id: integer
   - name: string
   - description: text
   - price: float
-  - picture_path: string
-  - type: string
-  - color: string
-  - size: string (use size format like x\*y\*z) 
+  - picture_path: string    // add later
+  - type: string    // add later
+  - color: string    // add later
+  - size: string (use size format like x\*y\*z)    // add later
   - **shop_id**: integer
 - ShoppingCartItem
   - id: integer

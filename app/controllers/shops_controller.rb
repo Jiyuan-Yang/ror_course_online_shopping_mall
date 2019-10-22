@@ -1,7 +1,6 @@
 class ShopsController < ApplicationController
   def new
     @shop = Shop.new
-    @user = current_user
   end
 
   def show
@@ -14,10 +13,11 @@ class ShopsController < ApplicationController
 
   def create
     # deal with the POST request
-    @shop = current_user.shops.build(shop_params)
+    # @shop = current_user.shops.build(shop_params)
+    @shop = User.find(params[:id]).shops.build(shop_params)
     if @shop.save
       flash[:success] = "Your shop \"#{shop_params[:name]}\" is ready!"
-      redirect_to user_shop_path(current_user.id) # equals to `redirect_to user_url(@user)`
+      redirect_to user_shop_path(params[:id]) # equals to `redirect_to user_url(@user)`
       # Attention shops_url is the overall view of shop, shop_url is the user's
     else
       render 'new'
