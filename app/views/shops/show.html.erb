@@ -9,7 +9,7 @@
   </div>
 <% else %>
   <% @shop.products.each do |item| %>
-    <div><%= item.id %>|<%= link_to item.name, shop_path(item.id) %>|
+    <div><%= item.id %>|<%= link_to item.name, product_path(item.id) %>|
       <%= item.description %>|<%= item.price %></div>
   <% end %>
   <div><%= link_to "click here", create_product_get_path %> to create you product!</div>
