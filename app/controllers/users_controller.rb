@@ -11,9 +11,10 @@ class UsersController < ApplicationController
     # deal with the POST request
     @user = User.new(user_params)
     if @user.save
+      ShoppingCart.new(user_id: @user.id).save
       log_in @user
       flash[:success] = "Welcome to the Max Jim's"
-      redirect_to @user   # equals to `redirect_to user_url(@user)`
+      redirect_to @user # equals to `redirect_to user_url(@user)`
     else
       render 'new'
     end

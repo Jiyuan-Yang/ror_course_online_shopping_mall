@@ -30,28 +30,27 @@
   - id: integer
   - **product_id**: integer
   - amount: integer
-  - total_price: float
+  - total_price: float    // add later or may be not useful
   - **shopping_cart_id**: integer \#\# test the ShoppingCart character case
 - ShoppingCart
   - id: integer
   - **user_id**: integer
-  - total_price: float
+  - total_price: float    // add later or may be not useful
 - FavoriteItem
-  - id: integer
+  - id: integer    // this will be generate automatically
   - **product_id**: integer
-  - **favorite_id**: integer \#\# test the ShoppingCart character case
+  - **favorite_id**: integer 
 - Favorite
-  - id: integer
+  - id: integer    // this will be generate automatically
   - **user_id**: integer
 - OrderItem
-  - id: integer
+  - id: integer    // this will be generate automatically
   - **product_id**: integer
   - amount: integer
-  - total_price: float
-  - **buyer_order_id**: integer \#\# test the ShoppingCart character case
-  - **seller_order_id**: integer \#\# test the ShoppingCart character case
+  - total_price: float    // add later
+  - **order_id**: integer
 - Order
-  - id: integer
+  - id: integer    // this will be generate automatically
   - receiver_name: string
   - receiver_address: string
   - receiver_phone_number: string

@@ -1,0 +1,4 @@
+<h1><%= @user.name+'\'s shopping cart' %></h1>
+<% @user.shopping_cart.shopping_cart_items.each do |item| %>
+  <div><%= item.product_id %>|<%= item.amount %></div>
+<% end %>

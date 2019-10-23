@@ -1,3 +1,4 @@
 <% provide(:title, 'product') %>
 <h1>Products#show</h1>
 <div><%= @product.id %>|<%= @product.name %>|<%= @product.description %>|<%= @product.price %></div>
+<%= link_to 'add it to your shopping cart!', add_to_shopping_cart_path, method: :post %>

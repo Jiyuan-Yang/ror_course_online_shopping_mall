@@ -8,4 +8,5 @@ class Product < ApplicationRecord
   # use this to judge whether if it's a number
 
   belongs_to :shop
+  has_many :shopping_cart_items
 end

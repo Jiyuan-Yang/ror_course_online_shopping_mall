@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'shopping_carts/show'
   get 'products/new'
   get 'products/show'
   get 'shops/new'
@@ -22,6 +23,10 @@ Rails.application.routes.draw do
 
   get '/shops/:id/create_product', to: 'products#new', as: 'create_product_get'
   post '/shops/:id/create_product', to: 'products#create', as: 'create_product_post'
+
+  get '/users/:id/shopping_cart', to: 'shopping_carts#show', as: 'user_shopping_cart'
+  post '/products/:id/add_to_shopping_cart',
+       to: 'shopping_carts#add_to_shopping_cart', as: 'add_to_shopping_cart'
 
   resources :users
   resources :shops
