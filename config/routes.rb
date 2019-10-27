@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   post '/products/:id/add_one_item_to_order',
        to: 'orders#add_one_item_to_order', as: 'add_one_item_to_order'
+  post '/users/:id/add_items_in_shopping_cart_to_order',
+       to: 'orders#add_items_in_shopping_cart_to_order', as: 'add_items_in_shopping_cart_to_order'
 
   resources :users
   resources :shops

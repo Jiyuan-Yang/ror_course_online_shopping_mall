@@ -3,3 +3,5 @@
 <% @user.shopping_cart.shopping_cart_items.each do |item| %>
   <div><%= item.product_id %>|<%= item.amount %></div>
 <% end %>
+<br/>
+<%= link_to 'buy them!', add_items_in_shopping_cart_to_order_path, method: :post %>
