@@ -1,0 +1,5 @@
+<% provide(:title, 'favorites') %>
+<h1><%= @user.name+'\'s favorites' %></h1>
+<% @user.favorite.favorite_items.each do |item| %>
+  <div><%= item.product_id %>|<%= item.favorite_id %></div>
+<% end %>

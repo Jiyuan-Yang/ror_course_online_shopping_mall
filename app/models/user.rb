@@ -16,4 +16,5 @@ class User < ApplicationRecord
 
   has_many :shops
   has_one :shopping_cart
+  has_one :favorite
 end

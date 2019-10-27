@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'favorites/show'
+  get 'favorites/add_to_favorite'
   get 'shopping_carts/show'
   get 'products/new'
   get 'products/show'
@@ -27,6 +29,10 @@ Rails.application.routes.draw do
   get '/users/:id/shopping_cart', to: 'shopping_carts#show', as: 'user_shopping_cart'
   post '/products/:id/add_to_shopping_cart',
        to: 'shopping_carts#add_to_shopping_cart', as: 'add_to_shopping_cart'
+
+  get '/users/:id/favorite', to: 'favorites#show', as: 'user_favorite'
+  post '/products/:id/add_to_favorite',
+       to: 'favorites#add_to_favorite', as: 'add_to_favorite'
 
   resources :users
   resources :shops

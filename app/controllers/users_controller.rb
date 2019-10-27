@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       if @user.character == 'buyer'
         ShoppingCart.new(user_id: @user.id).save
+        Favorite.new(user_id: @user.id).save
       end
       log_in @user
       flash[:success] = "Welcome to the Max Jim's"

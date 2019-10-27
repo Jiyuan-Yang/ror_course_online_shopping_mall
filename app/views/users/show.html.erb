@@ -1,5 +1,10 @@
 <% provide(:title, @user.name + '\'s profile') %>
 <%= @user.name %>, <%= @user.email %>
+<br/>
 <% if @user.character == 'buyer' %>
   <%= link_to 'click here to see your shopping cart', user_shopping_cart_path %>
+<% end %>
+<br/>
+<% if @user.character == 'buyer' %>
+  <%= link_to 'click here to see your favorites', user_favorite_path %>
 <% end %>
