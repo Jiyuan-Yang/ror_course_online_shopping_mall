@@ -12,5 +12,7 @@ class OrdersController < ApplicationController
     @order_seller.save
     OrderItem.new(product_id:@product.id,amount:1,order_id:@order_buyer.id).save
     OrderItem.new(product_id:@product.id,amount:1,order_id:@order_seller.id).save
+    flash[:success] = "Successful!"
+    redirect_to @product
   end 
 end
