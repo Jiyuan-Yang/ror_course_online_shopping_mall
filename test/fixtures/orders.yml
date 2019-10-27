@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  receiver_name: MyString
+  receiver_address: MyString
+  receiver_phone_number: MyString
+  status: MyString
+  order_time: 2019-10-27
+  total_price: 1.5
+  user_id: 1
+
+two:
+  receiver_name: MyString
+  receiver_address: MyString
+  receiver_phone_number: MyString
+  status: MyString
+  order_time: 2019-10-27
+  total_price: 1.5
+  user_id: 1

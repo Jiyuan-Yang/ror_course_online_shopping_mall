@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_090127) do
+ActiveRecord::Schema.define(version: 2019_10_27_110144) do
 
   create_table "favorite_items", force: :cascade do |t|
     t.integer "product_id"
@@ -20,6 +20,26 @@ ActiveRecord::Schema.define(version: 2019_10_27_090127) do
   end
 
   create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "amount"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "receiver_name"
+    t.string "receiver_address"
+    t.string "receiver_phone_number"
+    t.string "status"
+    t.date "order_time"
+    t.float "total_price"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,6 +83,9 @@ ActiveRecord::Schema.define(version: 2019_10_27_090127) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "receiver_name"
+    t.string "receiver_address"
+    t.string "receiver_phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

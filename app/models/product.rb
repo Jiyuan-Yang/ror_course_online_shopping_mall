@@ -10,4 +10,5 @@ class Product < ApplicationRecord
   belongs_to :shop
   has_many :shopping_cart_items
   has_many :favorite_items
+  has_many :order_items
 end
