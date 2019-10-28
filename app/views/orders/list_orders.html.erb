@@ -1,0 +1,6 @@
+<% provide(:title, @user.name + '\'s orders') %>
+<%@user.orders.each do |order|%>
+<div>
+    order#<%=order.id%> <%=link_to 'click here to see more details', order%>
+</div>
+<%end%>

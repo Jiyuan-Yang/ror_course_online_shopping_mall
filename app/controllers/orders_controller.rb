@@ -1,5 +1,11 @@
 class OrdersController < ApplicationController
+  def list_orders
+    @user = current_user
+  end
+
   def show
+    @order = Order.find(params[:id])
+    @user = @order.user
   end
 
   def add_one_item_to_order

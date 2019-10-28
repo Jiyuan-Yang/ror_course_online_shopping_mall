@@ -37,7 +37,10 @@ Rails.application.routes.draw do
   post '/users/:id/add_items_in_shopping_cart_to_order',
        to: 'orders#add_items_in_shopping_cart_to_order', as: 'add_items_in_shopping_cart_to_order'
 
+  get '/users/:id/order', to: 'orders#list_orders', as: 'list_orders' 
+
   resources :users
   resources :shops
   resources :products
+  resources :orders
 end
