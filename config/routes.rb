@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
   get 'shopping_carts/show'
   get 'products/new'
   get 'products/show'
   get 'shops/new'
   get 'shops/show'
   get 'sessions/new'
-  root 'static_pages#home'
   get '/about', to: 'static_pages#about'
   get '/contact', to: 'static_pages#contact'
   get '/help', to: 'static_pages#help'
@@ -38,6 +38,13 @@ Rails.application.routes.draw do
        to: 'orders#add_items_in_shopping_cart_to_order', as: 'add_items_in_shopping_cart_to_order'
 
   get '/users/:id/order', to: 'orders#list_orders', as: 'list_orders' 
+
+  get '/users/:id/shopping_cart/cart_item_amount_add/:cart_item_id',
+      to: 'shopping_cart_items#item_amount_add', as: 'cart_item_amount_add'
+  get '/users/:id/shopping_cart/cart_item_amount_subtract/:cart_item_id',
+      to: 'shopping_cart_items#item_amount_subtract', as: 'cart_item_amount_subtract'
+  delete '/users/:id/shopping_cart/cart_item_destroy/:cart_item_id',
+         to: 'shopping_cart_items#destroy', as: 'cart_item_destroy'
 
   resources :users
   resources :shops

@@ -1,7 +1,12 @@
 <% provide(:title, 'shopping cart') %>
-<h1><%= @user.name+'\'s shopping cart' %></h1>
+<h1><%= @user.name + '\'s shopping cart' %></h1>
 <% @user.shopping_cart.shopping_cart_items.each do |item| %>
-  <div><%= item.product_id %>|<%= item.amount %></div>
+  <div><%= item.product_id %>|<%= item.amount %>|
+    <%= link_to '+', cart_item_amount_add_path(cart_item_id: item.id) %>|
+    <%= link_to '-', cart_item_amount_subtract_path(cart_item_id: item.id) %>|
+    <%= link_to 'delete', cart_item_destroy_path(cart_item_id: item.id), method: :delete,
+                data: {confirm: 'Are you sure?'} %>
+  </div>
 <% end %>
 <br/>
 <%= link_to 'buy them!', add_items_in_shopping_cart_to_order_path, method: :post %>
