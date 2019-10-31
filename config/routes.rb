@@ -49,6 +49,9 @@ Rails.application.routes.draw do
   delete '/users/:id/favorite/favorite_item_destroy/:favorite_item_id',
          to: 'favorite_items#destroy', as: 'favorite_item_destroy'
 
+  delete '/users/:id/order/order_destroy/:order_id',
+         to: 'orders#destroy', as: 'order_destroy'
+
   resources :users
   resources :shops
   resources :products

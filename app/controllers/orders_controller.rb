@@ -8,6 +8,14 @@ class OrdersController < ApplicationController
     @user = @order.user
   end
 
+  def destroy
+    @item = Order.find(params[:order_id])
+    order_id = @item.id
+    @item.destroy
+    flash[:success] = "Order id #{order_id} deleted!"
+    redirect_to(list_orders_path(id: params[:id]))
+  end
+
   def add_one_item_to_order
     @product = Product.find(params[:id])
     @shop = Shop.find(@product.shop_id)

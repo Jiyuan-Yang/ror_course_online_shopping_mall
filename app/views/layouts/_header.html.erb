@@ -12,12 +12,12 @@
             </a>
             <ul class="dropdown-menu">
               <% if get_user_character == 'seller' %>
-                <li><%= link_to "My Shops", user_shop_path(current_user.id) %></li>
-                <li><%= link_to "Orders of My Shops", list_orders_path(current_user.id) %></li>
+                <li><%= link_to "Shops", user_shop_path(current_user.id) %></li>
+                <li><%= link_to "Orders of Shops", list_orders_path(current_user.id) %></li>
               <% elsif get_user_character == 'buyer' %>
-                <li><%= link_to "My Shopping Cart", user_shopping_cart_path(current_user.id) %></li>
-                <li><%= link_to "My Favorites", user_favorite_path(current_user.id) %></li>
-                <li><%= link_to "My Orders", list_orders_path(current_user.id) %></li>
+                <li><%= link_to "Shopping Cart", user_shopping_cart_path(current_user.id) %></li>
+                <li><%= link_to "Favorites", user_favorite_path(current_user.id) %></li>
+                <li><%= link_to "Orders", list_orders_path(current_user.id) %></li>
               <% end %>
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
