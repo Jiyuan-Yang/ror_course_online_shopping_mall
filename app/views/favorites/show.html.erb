@@ -1,7 +1,7 @@
 <% provide(:title, 'favorites') %>
 <h1><%= @user.name + '\'s favorites' %></h1>
 <% @user.favorite.favorite_items.each do |item| %>
-  <div><%= item.product_id %>|<%= item.favorite_id %>|
+  <div><%= item.product.name %>|<%= item.favorite.user.name %>|
     <%= link_to 'delete', favorite_item_destroy_path(favorite_item_id: item.id),
                 method: :delete, data: {confirm: 'Are you sure?'} %>
   </div>

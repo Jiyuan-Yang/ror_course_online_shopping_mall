@@ -1,3 +1,21 @@
 <% provide(:title, 'Home') %>
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1> the Max Jim's </h1>
+<% if get_user_character == 'buyer' %>
+  <h2>products</h2>
+  <div>name|price|shop</div>
+  <% Product.all.each do |item| %>
+    <div><%= item.name %>|<%= item.price %>|<%= item.shop.name %>|<%= link_to 'see more', product_path(item.id) %></div>
+  <% end %>
+  <h2>shops</h2>
+  <div>name|owner</div>
+  <% Shop.all.each do |item| %>
+    <div><%= item.name %>|<%= item.user.name %>|<%= link_to 'see more', shop_path(item.id) %></div>
+  <% end %>
+<% elsif get_user_character == 'seller' %>
+  <h2>your shops</h2>
+  <% current_user.shops.all.each do |item| %>
+    <div><%= item.name %>|<%= link_to 'see more', shop_path(item.id) %></div>
+  <% end %>
+<% elsif get_user_character == 'administrator' %>
+
+<% end %>

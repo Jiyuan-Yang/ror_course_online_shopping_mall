@@ -1,7 +1,8 @@
 class ShoppingCartItemsController < ApplicationController
+  # @todo: when add validation, why doesn't it work????????
   def item_amount_add
     @item = ShoppingCartItem.find(params[:cart_item_id])
-    @item.update({amount: @item.amount + 1})
+    @item.update(amount: @item.amount + 1)
     redirect_to(user_shopping_cart_path(id: params[:id]))
   end
 

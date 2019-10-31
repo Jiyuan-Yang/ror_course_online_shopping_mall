@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   validates :name, presence: true, length: {maximum: 30}
-  validate :partial_unique_validation
+  validate :local_unique_validation
   validates :description, presence: true, length: {minimum: 10, maximum: 100}
 
   # VALID_PRICE_REGEX = /\A\d+(\.\d{1,2})\z/
@@ -14,11 +14,12 @@ class Product < ApplicationRecord
   has_many :order_items
 
   private
-  def partial_unique_validation
+  def local_unique_validation
     cur_shop_products = Shop.find(shop_id).products
     judge = 0
     cur_shop_products.each do |item|
-      if name == item.name
+      # in order to deal with update
+      if name == item.name and item.id != id
         judge = 1
       end
     end

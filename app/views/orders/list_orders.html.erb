@@ -1,7 +1,7 @@
 <% provide(:title, @user.name + '\'s orders') %>
 <% @user.orders.each do |order| %>
   <div>
-    order#<%= order.id %> <%= link_to 'click here to see more details', order %>|
+    order#<%= order.id %><%= link_to 'click here to see more details', order %>|
     <%= link_to 'delete', order_destroy_path(order_id: order.id), method: :delete,
                data: {confirm: 'Are you sure?'} %>
   </div>

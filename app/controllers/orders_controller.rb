@@ -46,9 +46,11 @@ class OrdersController < ApplicationController
         @order_seller.save
         created_order[@product.shop_id] = @order_seller.id
       end
-
-      OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id).save
-      OrderItem.new(product_id: @product.id, amount: 1, order_id: created_order[@product.shop_id]).save
+      OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id).save
+      OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id]).save
+      t.destroy
+      flash[:success] = "it has been added to your order!"
     end
+    redirect_to(user_shopping_cart_path(current_user.id))
   end
 end

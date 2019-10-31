@@ -1,5 +1,5 @@
 <% provide(:title, 'Order') %>
 <h1><%=@user.name%>'s Order #<%=@order.id%></h1>
 <%@order.order_items.each do |item|%>
-<div>product #<%=item.product_id%></div>
+<div><%=item.product.name%>|<%= item.amount %></div>
 <%end%>
