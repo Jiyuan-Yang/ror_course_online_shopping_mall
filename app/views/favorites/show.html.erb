@@ -6,3 +6,6 @@
                 method: :delete, data: {confirm: 'Are you sure?'} %>
   </div>
 <% end %>
+<% if @user.favorite.favorite_items.count == 0 %>
+  <div>click <%= link_to 'here', '#'%> to see all of the products</div>
+<% end %>

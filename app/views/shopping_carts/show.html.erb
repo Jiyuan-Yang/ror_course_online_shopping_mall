@@ -9,4 +9,8 @@
   </div>
 <% end %>
 <br/>
-<%= link_to 'buy them!', add_items_in_shopping_cart_to_order_path, method: :post %>
+<% if @user.shopping_cart.shopping_cart_items.count > 0 %>
+  <%= link_to 'buy them!', add_items_in_shopping_cart_to_order_path, method: :post %>
+<% else %>
+  <div>click <%= link_to 'here', '#'%> to see all of the products</div>
+<% end %>
