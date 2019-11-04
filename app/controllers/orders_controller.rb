@@ -20,36 +20,64 @@ class OrdersController < ApplicationController
     @product = Product.find(params[:id])
     @shop = Shop.find(@product.shop_id)
     @seller = User.find(@shop.user_id)
-    @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
-    @order_buyer.save
-    @order_seller = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
-    @order_seller.save
-    OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id).save
-    OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id).save
-    flash[:success] = "it has been added to your order!"
+    lack_info = []
+    if current_user.receiver_name.blank?
+      lack_info.append('receiver_name')
+    end
+    if current_user.receiver_address.blank?
+      lack_info.append('receiver_name')
+    end
+    if current_user.receiver_name.blank?
+      lack_info.append('receiver_phone_number')
+    end
+    if lack_info != []
+      flash[:danger] = "Please add your " + lack_info.inject { |all_info, info| all_info + ', ' + info }
+    else
+      @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
+      @order_buyer.save
+      @order_seller = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
+      @order_seller.save
+      OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id).save
+      OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id).save
+      flash[:success] = "it has been added to your order!"
+    end
     redirect_to(@product)
   end
 
   def add_items_in_shopping_cart_to_order
-    @shopping_cart = current_user.shopping_cart
-    @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
-    @order_buyer.save
-    created_order = Hash.new
+    lack_info = []
+    if current_user.receiver_name.blank?
+      lack_info.append('receiver_name')
+    end
+    if current_user.receiver_address.blank?
+      lack_info.append('receiver_name')
+    end
+    if current_user.receiver_name.blank?
+      lack_info.append('receiver_phone_number')
+    end
+    if lack_info != []
+      flash[:danger] = "Please add your " + lack_info.inject { |all_info, info| all_info + ', ' + info }
+    else
+      @shopping_cart = current_user.shopping_cart
+      @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
+      @order_buyer.save
+      created_order = Hash.new
 
-    @shopping_cart.shopping_cart_items.each do |t|
-      @product = t.product
-      @shop = Shop.find(@product.shop_id)
-      @seller = User.find(@shop.user_id)
+      @shopping_cart.shopping_cart_items.each do |t|
+        @product = t.product
+        @shop = Shop.find(@product.shop_id)
+        @seller = User.find(@shop.user_id)
 
-      if !created_order.has_key?(@product.shop_id)
-        @order_seller = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
-        @order_seller.save
-        created_order[@product.shop_id] = @order_seller.id
+        if !created_order.has_key?(@product.shop_id)
+          @order_seller = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
+          @order_seller.save
+          created_order[@product.shop_id] = @order_seller.id
+        end
+        OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id).save
+        OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id]).save
+        t.destroy
+        flash[:success] = "it has been added to your order!"
       end
-      OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id).save
-      OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id]).save
-      t.destroy
-      flash[:success] = "it has been added to your order!"
     end
     redirect_to(user_shopping_cart_path(current_user.id))
   end

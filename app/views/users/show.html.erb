@@ -1,4 +1,6 @@
 <% provide(:title, @user.name + '\'s profile') %>
 <%= @user.name %>, <%= @user.email %>
+<br />
+<%= @user.receiver_name %>, <%= @user.receiver_address %>, <%= @user.receiver_phone_number %>
 <br/>
 <%= link_to 'click here to see your orders', list_orders_path %>

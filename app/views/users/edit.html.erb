@@ -11,6 +11,7 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
+      <% if @user.character == 'buyer' %>
       <%= f.label :receiver_name %>
       <%= f.text_field :receiver_name, class: 'form-control' %>
 
@@ -19,7 +20,8 @@
 
       <%= f.label :receiver_phone_number %>
       <%= f.text_field :receiver_phone_number, class: 'form-control' %>
-
+      <% end %>
+      
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
