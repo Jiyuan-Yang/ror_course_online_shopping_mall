@@ -1,10 +1,18 @@
 class ShopsController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create]
+  before_action :correct_user_seller, only: [:new, :create]
+
   def new
     @shop = Shop.new
   end
 
   def show
-    @shop = Shop.find(params[:id])
+    if params[:shop_id].nil?
+      @shop = Shop.find(params[:id])
+    else
+      @shop = Shop.find(params[:shop_id])
+    end
+
     # here could use user id because it's passed
     # but in `new` it couldn't be reached
   end

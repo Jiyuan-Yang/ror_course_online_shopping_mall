@@ -1,5 +1,7 @@
 class ShoppingCartItemsController < ApplicationController
-  # @todo: when add validation, why doesn't it work????????
+  before_action :logged_in_user, only: [:item_amount_add, :item_amount_subtract, :destroy]
+  before_action :correct_user_buyer, only: [:item_amount_add, :item_amount_subtract, :destroy]
+
   def item_amount_add
     @item = ShoppingCartItem.find(params[:cart_item_id])
     @item.update(amount: @item.amount + 1)

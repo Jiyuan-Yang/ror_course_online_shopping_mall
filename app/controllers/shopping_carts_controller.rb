@@ -1,4 +1,9 @@
 class ShoppingCartsController < ApplicationController
+  before_action :logged_in_user, only: [:show, :add_to_shopping_cart]
+  before_action :correct_user_buyer, only: [:show]
+  before_action :correct_buyer, only: [:add_to_shopping_cart]
+  # we ensure that current user could add to sc only for himself
+
   def show
     @user = User.find(params[:id])
   end

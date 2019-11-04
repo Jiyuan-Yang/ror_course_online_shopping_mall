@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create]
+  before_action :correct_user_seller, only: [:new, :create]
+
+
   def new
     @product = Product.new
   end
@@ -8,10 +12,10 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Shop.find(params[:id]).products.build(product_params)
+    @product = Shop.find(params[:shop_id]).products.build(product_params)
     if @product.save
       flash[:success] = "Your product \"#{product_params[:name]}\" is ready!"
-      redirect_to shop_path(params[:id]) # equals to `redirect_to user_url(@user)`
+      redirect_to show_shop_get_path # equals to `redirect_to user_url(@user)`
       # Attention shops_url is the overall view of shop, shop_url is the user's
     else
       render 'new'

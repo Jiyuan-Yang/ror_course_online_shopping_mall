@@ -1,4 +1,8 @@
 class FavoritesController < ApplicationController
+  before_action :logged_in_user, only: [:show, :add_to_favorite]
+  before_action :correct_user, only: [:show]
+  before_action :correct_buyer, only: [:add_to_favorite]
+
   def show
     @user = User.find(params[:id])
   end

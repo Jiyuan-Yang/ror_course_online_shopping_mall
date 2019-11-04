@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :logged_in_user, only: [:list_orders, :show, :destroy, :add_one_item_to_order, :add_items_in_shopping_cart_to_order]
+  before_action :correct_user, only: [:list_orders, :show, :destroy]
+
   def list_orders
-    @user = current_user
+    # @user = current_user
+    @user = User.find(params[:id])
   end
 
   def show

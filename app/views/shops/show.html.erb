@@ -5,12 +5,13 @@
 <% if @shop.products.count == 0 %>
   <div>
     it seems that you don't have any products,
-    <%= link_to "click here", create_product_get_path %> to create you product!
+    <%= link_to "click here", create_product_get_path(shop_id: @shop.id) %> to create you product!
   </div>
 <% else %>
   <% @shop.products.each do |item| %>
     <div><%= item.id %>|<%= link_to item.name, product_path(item.id) %>|
       <%= item.description %>|<%= item.price %></div>
   <% end %>
-  <div><%= link_to "click here", create_product_get_path %> to create you product!</div>
+  <!-- 这里为seller访问shop和product增加了专门的路由，用于创建，对于一般用户，这里不应显示 -->
+  <div><%= link_to "click here", create_product_get_path(shop_id: @shop.id) %> to create you product!</div>
 <% end %>
