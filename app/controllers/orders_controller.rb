@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :logged_in_user, only: [:list_orders, :show, :destroy, :add_one_item_to_order, :add_items_in_shopping_cart_to_order]
-  before_action :correct_user, only: [:list_orders, :show, :destroy]
+  before_action :correct_user, only: [:list_orders, :destroy]
 
   def list_orders
     # @user = current_user
@@ -16,6 +16,11 @@ class OrdersController < ApplicationController
     @item = Order.find(params[:order_id])
     order_id = @item.id
     @item.destroy
+    Order.all.each do |item|
+      if item.link_order_id == order_id
+        item.destroy
+      end
+    end
     flash[:success] = "Order id #{order_id} deleted!"
     redirect_to(list_orders_path(id: params[:id]))
   end
@@ -39,7 +44,7 @@ class OrdersController < ApplicationController
     else
       @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
       @order_buyer.save
-      @order_seller = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
+      @order_seller = Order.new(link_order_id: @order_buyer.id, receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
       @order_seller.save
       OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id).save
       OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id).save
@@ -73,7 +78,7 @@ class OrdersController < ApplicationController
         @seller = User.find(@shop.user_id)
 
         if !created_order.has_key?(@product.shop_id)
-          @order_seller = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
+          @order_seller = Order.new(link_order_id: @order_buyer.id, receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
           @order_seller.save
           created_order[@product.shop_id] = @order_seller.id
         end

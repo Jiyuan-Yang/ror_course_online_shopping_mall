@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_110144) do
+ActiveRecord::Schema.define(version: 2019_11_04_044951) do
 
   create_table "favorite_items", force: :cascade do |t|
     t.integer "product_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_110144) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "link_order_id"
   end
 
   create_table "products", force: :cascade do |t|
