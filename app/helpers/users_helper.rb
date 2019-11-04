@@ -8,7 +8,7 @@ module UsersHelper
 
   def correct_user
     @user = User.find(params[:id])
-    if @user != current_user and @user.character != 'administrator'
+    if @user != current_user and current_user.character != 'administrator'
       flash[:danger] = "You have no right to do this"
       redirect_to(root_url)
     end
@@ -23,7 +23,7 @@ module UsersHelper
 
   def correct_user_buyer
     @user = User.find(params[:id])
-    if !(@user == current_user and @user.character == 'buyer') and @user.character != 'administrator'
+    if !(@user == current_user and current_user.character == 'buyer') and current_user.character != 'administrator'
       flash[:danger] = "You have no right to do this"
       redirect_to(root_url)
     end
@@ -38,7 +38,7 @@ module UsersHelper
 
   def correct_user_seller
     @user = User.find(params[:id])
-    if !(@user == current_user and @user.character == 'seller') and @user.character != 'administrator'
+    if !(@user == current_user and current_user.character == 'seller') and current_user.character != 'administrator'
       flash[:danger] = "You have no right to do this"
       redirect_to(root_url)
     end

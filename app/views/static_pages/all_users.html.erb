@@ -1,0 +1,3 @@
+<% User.all.each do |item| %>
+  <div><%= item.id %>|<%= item.name %>|<%= item.character %>|<%= link_to 'settings', edit_user_path(item.id) %></div>
+<% end %>

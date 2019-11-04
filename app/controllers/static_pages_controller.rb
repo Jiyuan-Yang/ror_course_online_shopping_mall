@@ -10,4 +10,16 @@ class StaticPagesController < ApplicationController
 
   def help
   end
+
+  def all_users
+
+  end
+
+  def all_shops
+
+  end
+
+  def all_orders
+
+  end
 end

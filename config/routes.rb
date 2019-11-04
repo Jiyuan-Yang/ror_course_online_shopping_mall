@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   get '/help', to: 'static_pages#help'
 
+  get '/all_users', to: 'static_pages#all_users'
+  get '/all_shops', to: 'static_pages#all_shops'
+  get '/all_orders', to: 'static_pages#all_orders'
+
   get '/sign_up', to: 'users#new'
   post '/sign_up', to: 'users#create'
   get '/login', to: 'sessions#new'
