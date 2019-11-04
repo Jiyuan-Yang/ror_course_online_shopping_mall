@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :edit, :update]
   before_action :correct_user, only: [:show, :edit, :update]
   before_action :correct_user_seller, only: [:show_shops]
+  before_action :correct_user_admin, only: [:destroy]
 
   def show
     @user = User.find(params[:id])
@@ -46,6 +47,14 @@ class UsersController < ApplicationController
     else
       render("edit")
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    name = @user.name
+    @user.destroy
+    flash[:success] = "User #{name} has been destroyed!"
+    redirect_to(all_users_path)
   end
 
   private

@@ -43,4 +43,11 @@ module UsersHelper
       redirect_to(root_url)
     end
   end
+
+  def correct_user_admin
+    if current_user.character != 'administrator'
+      flash[:danger] = "You have no right to do this"
+      redirect_to(root_url)
+    end
+  end
 end

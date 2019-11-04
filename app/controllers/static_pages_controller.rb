@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :correct_user_admin, only: [:all_orders, :all_users, :all_shops]
+
   def home
   end
 

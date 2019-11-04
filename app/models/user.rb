@@ -19,8 +19,8 @@ class User < ApplicationRecord
   VALID_RECEIVER_PHONE_REGEX = /\A(\d{11})?\z/i
   validates :receiver_phone_number, format: {with: VALID_RECEIVER_PHONE_REGEX, message: 'The phone number should contain 11 numbers'}
 
-  has_many :shops
-  has_one :shopping_cart
-  has_one :favorite
-  has_many :orders
+  has_many :shops, dependent: :delete_all
+  has_one :shopping_cart, dependent: :delete
+  has_one :favorite, dependent: :delete
+  has_many :orders, dependent: :delete_all
 end
