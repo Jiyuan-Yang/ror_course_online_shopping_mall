@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   # this is used for sellers to see there shops, for buyer, just use shop id to get shop_path(id)
 
   get '/users/:id/user_shop/:shop_id', to: 'shops#show', as: 'show_shop_get'
+  delete '/users/:id/user_shop/:shop_id', to:'shops#destroy'
   get '/users/:id/create_shop', to: 'shops#new', as: 'create_shop_get'
   post '/users/:id/create_shop', to: 'shops#create', as: 'create_shop_post'
 

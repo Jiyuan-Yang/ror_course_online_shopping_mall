@@ -20,7 +20,7 @@ class User < ApplicationRecord
   validates :receiver_phone_number, format: {with: VALID_RECEIVER_PHONE_REGEX, message: 'The phone number should contain 11 numbers'}
 
   has_many :shops, dependent: :delete_all
-  has_one :shopping_cart, dependent: :delete
-  has_one :favorite, dependent: :delete
+  has_one :shopping_cart, dependent: :destroy
+  has_one :favorite, dependent: :destroy
   has_many :orders, dependent: :delete_all
 end

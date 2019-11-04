@@ -1,3 +1,4 @@
 <% Shop.all.each do |item| %>
-  <div><%= item.id %>|<%= item.name %>|<%= item.user.name %></div>
+  <div><%= item.id %>|<%= item.name %>|<%= item.user.name %>|
+    <%= link_to 'delete', show_shop_get_path(id: item.user.id, shop_id: item.id), method: :delete, data: {confirm: 'Are you sure?'} %></div>
 <% end %>

@@ -1,5 +1,5 @@
 class ShopsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :destroy]
   before_action :correct_user_seller, only: [:new, :create]
 
   def new
@@ -30,6 +30,15 @@ class ShopsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @shop = Shop.find(params[:shop_id])
+    user_name = @shop.user.name
+    shop_name = @shop.name
+    @shop.destroy
+    flash[:success] = "User #{user_name}'s shop #{shop_name} has been destroyed!"
+    redirect_to(user_shop_path(params[:id]))
   end
 
   private

@@ -6,7 +6,8 @@
   </div>
 <% else %>
   <% @user.shops.each do |item| %>
-    <div><%= item.id %>|<%= link_to item.name, show_shop_get_path(shop_id: item.id) %>|<%= item.description %></div>
+    <div><%= item.id %>|<%= link_to item.name, show_shop_get_path(shop_id: item.id) %>|<%= item.description %>|
+    <%= link_to 'delete', show_shop_get_path(shop_id: item.id), method: :delete, data:{confirm: 'Are you sure?'} %></div>
   <% end %>
   <div><%= link_to "click here", create_shop_get_path %> to create you shop!</div>
 <% end %>
