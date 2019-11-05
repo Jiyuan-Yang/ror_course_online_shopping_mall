@@ -5,8 +5,10 @@ source 'https://gems.ruby-china.com'
 ruby '2.5.1'
 
 gem 'bootstrap-sass'
-gem 'bootstrap-will_paginate'
+gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bcrypt'
+gem 'nokogiri', '1.8.1'
+gem 'will_paginate', '3.1.7'
 
 gem 'rake', '13.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
