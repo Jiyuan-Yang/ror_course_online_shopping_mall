@@ -3,7 +3,18 @@
 
 <div>
   <% if @user.shopping_cart.shopping_cart_items.any? %>
-    <div>
+    <div class="container-fluid ">
+      <div class="row table_head">
+        <div class="col-md-4">
+          product
+        </div>
+        <div class="col-md-4">
+          price
+        </div>
+        <div class="col-md-4">
+          number
+        </div>
+      </div>
       <%= render @shopping_cart_items %>
     </div>
     <%= will_paginate @shopping_cart_items %>

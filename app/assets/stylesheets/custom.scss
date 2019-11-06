@@ -144,6 +144,13 @@ input {
   }
 }
 
+.table_head{
+  padding: 10px 0;
+  border-top: 1px solid #e8e8e8;
+  font-size: large;
+  font-weight: bold;
+}
+
 .order {
   padding: 20px 0;
   border-top: 1px solid #e8e8e8;
@@ -152,4 +159,9 @@ input {
 .shopping_cart_item {
     padding: 20px 0;
     border-top: 1px solid #e8e8e8;
+}
+
+.favorite_item {
+  padding: 20px 0;
+  border-top: 1px solid #e8e8e8;
 }

@@ -1,11 +1,20 @@
 <% provide(:title, 'favorites') %>
 <h1><%= @user.name + '\'s favorites' %></h1>
-<% @user.favorite.favorite_items.each do |item| %>
-  <div><%= item.product.name %>|<%= item.favorite.user.name %>|
-    <%= link_to 'delete', favorite_item_destroy_path(favorite_item_id: item.id),
-                method: :delete, data: {confirm: 'Are you sure?'} %>
+
+<% if @user.favorite.favorite_items.any? %>
+  <div class="container-fluid">
+    <div class="row table_head">
+      <div class="col-md-4">
+        product
+      </div>
+      <div class="col-md-4">
+        user_id
+      </div>
+    </div>
+    <%= render @favorite_items %>
   </div>
+  <%= will_paginate @favorite_items %>
 <% end %>
 <% if @user.favorite.favorite_items.count == 0 %>
-  <div>click <%= link_to 'here', '#'%> to see all of the products</div>
+  <div>click <%= link_to 'here', '#' %> to see all of the products</div>
 <% end %>

@@ -1,0 +1,9 @@
+<div class="row favorite_item">
+  <div class="col-md-4"><%= favorite_item.product.name %></div>
+  <div class="col-md-4"> <%= favorite_item.favorite.user.name %> </div>
+  <div class="col-md-4">
+    <button class="btn btn-danger">
+      <%= link_to 'delete', favorite_item_destroy_path(favorite_item_id: favorite_item.id),
+                  method: :delete, data: {confirm: 'Are you sure?'} %>  </button>
+  </div>
+</div>

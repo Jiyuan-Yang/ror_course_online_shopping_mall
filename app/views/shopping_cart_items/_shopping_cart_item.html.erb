@@ -1,15 +1,18 @@
-<div class="container-fluid shopping_cart_item">
-  <div class="row">
-    <div class="col-md-4"><%= shopping_cart_item.product.name %></div>
-    <div class="col-md-4"><%= shopping_cart_item.product.price %></div>
-    <div class="col-md-4">
+<div class="row shopping_cart_item">
+  <div class="col-md-4"><%= shopping_cart_item.product.name %></div>
+  <div class="col-md-4"><%= shopping_cart_item.product.price %></div>
+  <div class="col-md-4">
+    <button class="btn btn-xs">
       <%= link_to '+', cart_item_amount_add_path(cart_item_id: shopping_cart_item.id) %>
-      <%= shopping_cart_item.amount %>
+    </button>
+    <%= shopping_cart_item.amount %>
+    <button class="btn btn-xs">
       <%= link_to '-', cart_item_amount_subtract_path(cart_item_id: shopping_cart_item.id) %>
-      <button class="btn btn-danger">
-        <%= link_to 'delete', cart_item_destroy_path(cart_item_id: shopping_cart_item.id), method: :delete,
-                    data: {confirm: 'Are you sure?'} %>
-      </button>
-    </div>
+    </button>
+    <button class="btn btn-danger">
+      <%= link_to 'delete', cart_item_destroy_path(cart_item_id: shopping_cart_item.id), method: :delete,
+                  data: {confirm: 'Are you sure?'} %>
+    </button>
   </div>
 </div>
+

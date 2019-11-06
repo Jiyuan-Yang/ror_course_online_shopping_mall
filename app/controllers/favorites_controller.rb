@@ -5,6 +5,7 @@ class FavoritesController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @favorite_items = @user.favorite.favorite_items.paginate(:page => params[:page], :per_page => 8)
   end
 
   def add_to_favorite
