@@ -6,6 +6,7 @@ class ShoppingCartsController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @shopping_cart_items = @user.shopping_cart.shopping_cart_items.paginate(:page => params[:page], :per_page => 6)
   end
 
   def add_to_shopping_cart

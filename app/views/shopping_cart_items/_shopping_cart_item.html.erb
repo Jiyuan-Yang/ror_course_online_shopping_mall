@@ -1,0 +1,12 @@
+<div class="container-fluid">
+<li class="row">
+<div class="col-md-4"><%= shopping_cart_item.product.name %></div>
+<div class="col-md-4"><%= shopping_cart_item.product.price %>|<%= shopping_cart_item.amount %></div>
+<div class="col-md-4">  <%= link_to '+', cart_item_amount_add_path(cart_item_id: shopping_cart_item.id) %>|
+  <%= link_to '-', cart_item_amount_subtract_path(cart_item_id: shopping_cart_item.id) %>
+  <button class="btn btn-danger">
+  <%= link_to 'delete', cart_item_destroy_path(cart_item_id: shopping_cart_item.id), method: :delete,
+                data: {confirm: 'Are you sure?'} %>
+  </button>
+  </div>
+</li></div>
