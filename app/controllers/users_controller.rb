@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def show_shops
     @user = User.find(params[:id])
+    @shops = @user.shops.paginate(:page => params[:page], :per_page => 8)
   end
 
   def edit

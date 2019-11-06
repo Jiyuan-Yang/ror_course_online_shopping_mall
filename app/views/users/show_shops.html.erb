@@ -1,13 +1,22 @@
+<% provide(:title, @user.name + '\'s shops') %>
 <h1>this is the place for user the take a look at there shops</h1>
 <% if @user.shops.count == 0 %>
   <div>
     it seems that you don't have any shops,
-    <%= link_to "click here", create_shop_get_path %> to create you shop!
+    <button class="btn"> <%= link_to "click here", create_shop_get_path %> to create you shop!</button>
   </div>
 <% else %>
-  <% @user.shops.each do |item| %>
-    <div><%= item.id %>|<%= link_to item.name, show_shop_get_path(shop_id: item.id) %>|<%= item.description %>|
-    <%= link_to 'delete', show_shop_get_path(shop_id: item.id), method: :delete, data:{confirm: 'Are you sure?'} %></div>
-  <% end %>
-  <div><%= link_to "click here", create_shop_get_path %> to create you shop!</div>
+  <div class="container-fluid">
+    <div class="row table_head">
+      <div class="col-md-2"> shop id</div>
+      <div class="col-md-4"> shop.name</div>
+      <div class="col-md-4"> description</div>
+      <div class="col-md-2"> delete</div>
+    </div>
+    <%= render @shops %>
+  </div>
+  <%= will_paginate @shops %>
+  <button class="btn btn-success">
+    <div><%= link_to "create a shop", create_shop_get_path %> </div>
+  </button>
 <% end %>
