@@ -1,5 +1,12 @@
 <% provide(:title, 'Order') %>
-<h1><%=@user.name%>'s Order #<%=@order.id%></h1>
-<%@order.order_items.each do |item|%>
-<div><%=item.product.name%>|<%= item.amount %></div>
-<%end%>
+<h1><%= @user.name %>'s Order #<%= @order.id %></h1>
+<% if @order.order_items.any? %>
+  <div class="container-fluid">
+    <div class="row table_head">
+      <div class="col-md-4"> product</div>
+      <div class="col-md-offset-8"> amount</div>
+    </div>
+    <%= render @order_items %>
+  </div>
+<% end %>
+

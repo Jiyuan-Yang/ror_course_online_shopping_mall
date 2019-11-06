@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @user = @order.user
+    @order_items = @order.order_items
   end
 
   def destroy
