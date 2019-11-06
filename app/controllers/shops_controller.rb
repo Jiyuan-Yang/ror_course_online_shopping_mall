@@ -9,8 +9,10 @@ class ShopsController < ApplicationController
   def show
     if params[:shop_id].nil?
       @shop = Shop.find(params[:id])
+      @products = @shop.products.paginate(:page => params[:page], :per_page => 6)
     else
       @shop = Shop.find(params[:shop_id])
+      @products = @shop.products.paginate(:page => params[:page], :per_page => 6)
     end
 
     # here could use user id because it's passed

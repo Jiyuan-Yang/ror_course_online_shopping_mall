@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   def list_orders
     # @user = current_user
     @user = User.find(params[:id])
-    @orders = @user.orders.paginate(:page => params[:page], :per_page => 8)
+    @orders = @user.orders.paginate(:page => params[:page], :per_page => 6)
   end
 
   def show

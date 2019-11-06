@@ -144,7 +144,7 @@ input {
   }
 }
 
-.table_head{
+.table_head {
   padding: 10px 0;
   border-top: 1px solid #e8e8e8;
   font-size: large;
@@ -157,8 +157,8 @@ input {
 }
 
 .shopping_cart_item {
-    padding: 20px 0;
-    border-top: 1px solid #e8e8e8;
+  padding: 20px 0;
+  border-top: 1px solid #e8e8e8;
 }
 
 .favorite_item {
@@ -177,6 +177,11 @@ input {
 }
 
 .shop {
+  padding: 20px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+.product {
   padding: 20px 0;
   border-top: 1px solid #e8e8e8;
 }

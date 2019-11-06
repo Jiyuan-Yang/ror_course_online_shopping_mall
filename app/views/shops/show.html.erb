@@ -1,17 +1,38 @@
 <% provide(:title, 'Shop') %>
+
 <h1><%= @shop.name %></h1>
-<div><%= @shop.description %></div>
-<h2>products</h2>
+
+<h2><%= @shop.description %></h2>
+
+
 <% if @shop.products.count == 0 %>
   <div>
     it seems that you don't have any products,
     <%= link_to "click here", create_product_get_path(shop_id: @shop.id) %> to create you product!
   </div>
 <% else %>
-  <% @shop.products.each do |item| %>
-    <div><%= item.id %>|<%= link_to item.name, product_path(item.id) %>|
-      <%= item.description %>|<%= item.price %></div>
+  <% if @shop.products.any? %>
+    <div class="container-fluid">
+      <div class="row table_head">
+        <div class="col-md-3">
+          product id
+        </div>
+        <div class="col-md-3">
+          name
+        </div>
+        <div class="col-md-3">
+          description
+        </div>
+        <div class="col-md-3">
+          price
+        </div>
+      </div>
+      <%= render @products %>
+    </div>
+    <%= will_paginate @products %>
   <% end %>
   <!-- 这里为seller访问shop和product增加了专门的路由，用于创建，对于一般用户，这里不应显示 -->
-  <div><%= link_to "click here", create_product_get_path(shop_id: @shop.id) %> to create you product!</div>
+  <button class="btn btn-success">
+    <div><%= link_to "create you product", create_product_get_path(shop_id: @shop.id) %> </div>
+  </button>
 <% end %>
