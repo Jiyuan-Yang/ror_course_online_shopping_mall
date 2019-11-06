@@ -1,10 +1,27 @@
 <% provide(:title, 'product') %>
 <h1>Products#show</h1>
-<div><%= @product.id %>|<%= @product.name %>|<%= @product.description %>|<%= @product.price %></div>
-<% if get_user_character == 'buyer' %>
-  <%= link_to 'add it to your shopping cart!', add_to_shopping_cart_path, method: :post %>
-  <br/>
-  <%= link_to 'add it to your favorites!', add_to_favorite_path, method: :post %>
-  <br/>
-  <%= link_to 'buy it!', add_one_item_to_order_path, method: :post %>
-<% end %>
+<div class="container-fluid">
+  <div class="row table_head">
+    <div class="col-md-2"> product id</div>
+    <div class="col-md-4"> product name</div>
+    <div class="col-md-4"> description</div>
+    <div class="col-md-2"> price</div>
+  </div>
+  <div class="row product">
+    <div class="col-md-2"> <%= @product.id %> </div>
+    <div class="col-md-4"> <%= @product.name %> </div>
+    <div class="col-md-4"> <%= @product.description %> </div>
+    <div class="col-md-2"> <%= @product.price %></div>
+  </div>
+  <% if get_user_character == 'buyer' %>
+    <div class="col-md-4">
+      <button class="btn"> <%= link_to 'add it to your shopping cart!', add_to_shopping_cart_path, method: :post %> </button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn"> <%= link_to 'add it to your favorites!', add_to_favorite_path, method: :post %> </button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn"> <%= link_to 'buy it!', add_one_item_to_order_path, method: :post %> </button>
+    </div>
+  <% end %>
+</div>
