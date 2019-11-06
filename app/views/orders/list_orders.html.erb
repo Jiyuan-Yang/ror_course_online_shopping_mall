@@ -2,9 +2,9 @@
 
 <div >
   <% if @user.orders.any? %>
-    <ol class="orders">
+    <div class="container-fluid">
       <%=render @orders%>
-    </ol>
+    </div>
     <%= will_paginate %>
   <% end %>
 </div>

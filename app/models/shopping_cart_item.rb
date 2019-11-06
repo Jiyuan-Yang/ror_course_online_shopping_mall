@@ -1,5 +1,5 @@
 class ShoppingCartItem < ApplicationRecord
-  validate :local_unique_validation
+  #validate :local_unique_validation
 
   belongs_to :shopping_cart
   belongs_to :product

@@ -1,19 +1,26 @@
 <% provide(:title, 'shopping cart') %>
 <h1><%= @user.name + '\'s shopping cart' %></h1>
 
-<div >
+<div>
   <% if @user.shopping_cart.shopping_cart_items.any? %>
-    <ol class = "shopping_cart_item">
-      <%=render @shopping_cart_items%>
-    </ol>
-    <%= will_paginate @shopping_cart_items%>
+    <div>
+      <%= render @shopping_cart_items %>
+    </div>
+    <%= will_paginate @shopping_cart_items %>
   <% end %>
 </div>
 
 
-<br/>
-<% if @user.shopping_cart.shopping_cart_items.count > 0 %>
-  <%= link_to 'buy them!', add_items_in_shopping_cart_to_order_path, method: :post %>
-<% else %>
-  <div>click <%= link_to 'here', '#'%> to see all of the products</div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-9">
+      <button class="btn btn-success btn-lg">
+        <% if @user.shopping_cart.shopping_cart_items.count > 0 %>
+          <%= link_to 'buy them!', add_items_in_shopping_cart_to_order_path, method: :post %>
+        <% else %>
+          <div>click <%= link_to 'here', '#' %> to see all of the products</div>
+        <% end %>
+      </button>
+    </div>
+  </div>
+</div>
