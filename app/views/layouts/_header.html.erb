@@ -3,7 +3,8 @@
     <%= link_to "the Max Jim's", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
+        <li>
+          <%= link_to "Home", root_path %></li>
         <li><%= link_to "Help", help_path %></li>
         <% if logged_in? %>
           <% if get_user_character == 'administrator' %>
@@ -16,12 +17,37 @@
             </a>
             <ul class="dropdown-menu">
               <% if get_user_character == 'seller' %>
-                <li><%= link_to "Shops", user_shop_path(current_user.id) %></li>
-                <li><%= link_to "Orders of Shops", list_orders_path(current_user.id) %></li>
+                <li>
+                  <%= link_to user_shop_path(current_user.id) do %>
+                    Shops
+                    <span class="badge"><%= @current_user.shops.count() %></span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to list_orders_path(current_user.id) do %>
+                    Orders of Shops
+                    <span class="badge"><%= @current_user.orders.count() %></span>
+                  <% end %>
+                </li>
               <% elsif get_user_character == 'buyer' %>
-                <li><%= link_to "Shopping Cart", user_shopping_cart_path(current_user.id) %></li>
-                <li><%= link_to "Favorites", user_favorite_path(current_user.id) %></li>
-                <li><%= link_to "Orders", list_orders_path(current_user.id) %></li>
+                <li>
+                  <%= link_to user_shopping_cart_path(current_user.id) do %>
+                    Shopping Cart
+                    <span class="badge"><%= @current_user.shopping_cart.shopping_cart_items.count() %></span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to user_favorite_path(current_user.id) do %>
+                    Favorites
+                    <span class="badge"><%= @current_user.favorite.favorite_items.count() %></span>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to list_orders_path(current_user.id) do %>
+                    Orders
+                    <span class="badge"><%= @current_user.orders.count() %></span>
+                  <% end %>
+                </li>
               <% end %>
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
