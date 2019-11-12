@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @user = @order.user
-    @order_items = @order.order_items
+    @order_items = @order.order_items.paginate(:page => params[:page], :per_page => 6)
   end
 
   def destroy
@@ -48,8 +48,11 @@ class OrdersController < ApplicationController
       @order_buyer.save
       @order_seller = Order.new(link_order_id: @order_buyer.id, receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
       @order_seller.save
-      OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id).save
-      OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id).save
+      @first = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id)
+      @first.save
+      @second = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id, corresponding_id: @first.id)
+      @second.save
+      @first.update(:corresponding_id=>@second.id)
       flash[:success] = "it has been added to your order!"
     end
     redirect_to(@product)
@@ -84,8 +87,11 @@ class OrdersController < ApplicationController
           @order_seller.save
           created_order[@product.shop_id] = @order_seller.id
         end
-        OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id).save
-        OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id]).save
+        @first=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id)
+        @first.save
+        @second=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id], corresponding_id: @first.id)
+        @second.save
+        @first.update(:corresponding_id=>@second.id)
         t.destroy
         flash[:success] = "it has been added to your order!"
       end

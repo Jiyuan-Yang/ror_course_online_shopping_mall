@@ -60,6 +60,8 @@ Rails.application.routes.draw do
 
   get '/category/:category', to:'products#show_one_category', as:'show_one_category'
 
+  delete '/orders/:order_id/:order_item_id', to:'order_items#destroy', as:'order_item_destroy'
+
   resources :users
   resources :shops
   resources :products
