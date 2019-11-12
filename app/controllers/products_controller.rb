@@ -22,6 +22,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show_one_category
+    @products = Product.where("category=?", 'animal').paginate(:page => params[:page], :per_page => 6)
+  end
+
   private
 
   def product_params

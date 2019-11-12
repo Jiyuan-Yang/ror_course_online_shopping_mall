@@ -1,0 +1,16 @@
+<% provide(:title, params[:category]) %>
+<h1><%= params[:category] %></h1>
+<div>
+  <% if @products.any? %>
+    <div class="container-fluid">
+      <div class="row table_head">
+        <div class="col-md-3">  product id  </div>
+        <div class="col-md-3"> product name  </div>
+        <div class="col-md-3"> description  </div>
+        <div class="col-md-3"> price  </div>
+      </div>
+      <%= render @products %>
+      <%= will_paginate %>
+    </div>
+  <% end %>
+</div>
