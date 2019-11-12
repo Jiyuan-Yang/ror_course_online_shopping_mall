@@ -1,6 +1,6 @@
 <% provide(:title, 'Create shop') %>
 <h1>Sign up</h1>
-<div class="row">
+<div class="row forms">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@product, url: create_product_post_path, method: :post) do |f| %>
       <%= render 'shared/error_messages', item: @product %>
