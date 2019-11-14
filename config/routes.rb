@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   post '/users/:id/add_items_in_shopping_cart_to_order',
        to: 'orders#add_items_in_shopping_cart_to_order', as: 'add_items_in_shopping_cart_to_order'
 
-  get '/users/:id/order', to: 'orders#list_orders', as: 'list_orders' 
+  get '/users/:id/order', to: 'orders#list_orders', as: 'list_orders'
 
   get '/users/:id/shopping_cart/cart_item_amount_add/:cart_item_id',
       to: 'shopping_cart_items#item_amount_add', as: 'cart_item_amount_add'
@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   get '/category/:category', to:'products#show_one_category', as:'show_one_category'
 
   delete '/orders/:order_id/:order_item_id', to:'order_items#destroy', as:'order_item_destroy'
+
+  post '/search', to: 'search_results#search', as: 'search_results_display'
 
   resources :users
   resources :shops

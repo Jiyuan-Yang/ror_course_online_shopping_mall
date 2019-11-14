@@ -1,0 +1,18 @@
+<h1>this is the search result for</h1>
+<h2><%= @keyword %></h2>
+<h3>products</h3>
+<% if @product_result.count == 0 %>
+  <div>no product found</div>
+<% else %>
+  <% @product_result.each do |item| %>
+    <div><%= item.id %>|<%= item.name %></div>
+  <% end %>
+<% end %>
+<h3>shops</h3>
+<% if @shop_result.count == 0 %>
+  <div>no shop found</div>
+<% else %>
+  <% @shop_result.each do |item| %>
+    <div><%= item.id %>|<%= item.name %></div>
+  <% end %>
+<% end %>
