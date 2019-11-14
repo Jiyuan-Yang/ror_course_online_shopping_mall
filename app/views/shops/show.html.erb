@@ -32,7 +32,6 @@
     <%= will_paginate @products %>
   <% end %>
   <!-- 这里为seller访问shop和product增加了专门的路由，用于创建，对于一般用户，这里不应显示 -->
-  <button class="btn btn-success">
-    <div><%= link_to "create you product", create_product_get_path(shop_id: @shop.id) %> </div>
-  </button>
+
+  <div><%= link_to '<button class="btn btn-success">create you product</button>'.html_safe, create_product_get_path(shop_id: @shop.id) %> </div>
 <% end %>

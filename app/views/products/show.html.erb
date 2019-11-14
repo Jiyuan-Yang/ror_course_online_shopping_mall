@@ -15,13 +15,13 @@
   </div>
   <% if get_user_character == 'buyer' %>
     <div class="col-md-4">
-      <button class="btn"> <%= link_to 'add it to your shopping cart!', add_to_shopping_cart_path, method: :post %> </button>
+      <%= link_to '<button class="btn">add it to your shopping cart!</button>'.html_safe, add_to_shopping_cart_path, method: :post %>
     </div>
     <div class="col-md-4">
-      <button class="btn"> <%= link_to 'add it to your favorites!', add_to_favorite_path, method: :post %> </button>
+      <%= link_to '<button class="btn">add it to your favorites!</button>'.html_safe, add_to_favorite_path, method: :post %>
     </div>
     <div class="col-md-4">
-      <button class="btn"> <%= link_to 'buy it!', add_one_item_to_order_path, method: :post %> </button>
+      <%= link_to '<button class="btn">buy it!</button>'.html_safe, add_one_item_to_order_path, method: :post %>
     </div>
   <% end %>
 </div>

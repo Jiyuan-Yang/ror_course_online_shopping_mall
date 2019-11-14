@@ -3,6 +3,6 @@
   <div class="col-md-4"> <%= link_to shop.name, show_shop_get_path(shop_id: shop.id) %> </div>
   <div class="col-md-4"> <%= shop.description %> </div>
   <div class="col-md-2">
-   <button class="btn btn-danger"> <%= link_to 'delete', show_shop_get_path(shop_id: shop.id), method: :delete, data: {confirm: 'Are you sure?'} %></button>
+    <%= link_to '<button class="btn btn-danger"> delete </button>'.html_safe, show_shop_get_path(shop_id: shop.id), method: :delete, data: {confirm: 'Are you sure?'} %>
   </div>
 </div>

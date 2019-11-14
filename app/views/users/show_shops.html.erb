@@ -16,7 +16,6 @@
     <%= render @shops %>
   </div>
   <%= will_paginate @shops %>
-  <button class="btn btn-success">
-    <div><%= link_to "create a shop", create_shop_get_path %> </div>
-  </button>
+
+  <div><%= link_to '<button class="btn btn-success">create a shop</button>'.html_safe, create_shop_get_path %> </div>
 <% end %>

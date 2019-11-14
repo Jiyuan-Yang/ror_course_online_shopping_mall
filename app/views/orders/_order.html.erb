@@ -4,12 +4,8 @@
   </div>
 
   <div class="col-md-offset-8">
-    <button class="btn">
-      <%= link_to 'details', order %>
-    </button>
-    <button class="btn btn-danger">
-      <%= link_to 'delete', order_destroy_path(order_id: order.id), method: :delete,
-                  data: {confirm: 'Are you sure?'} %>
-    </button>
+    <%= link_to '<button class="btn">details</button>'.html_safe, order %>
+    <%= link_to '<button class="btn btn-danger">delete</button>'.html_safe, order_destroy_path(order_id: order.id), method: :delete,
+                data: {confirm: 'Are you sure?'} %>
   </div>
 </div>
