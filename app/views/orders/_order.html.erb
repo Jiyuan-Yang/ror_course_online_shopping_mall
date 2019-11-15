@@ -9,3 +9,13 @@
                 data: {confirm: 'Are you sure?'} %>
   </div>
 </div>
+<div class="order_progress row">
+  <div class="progress">
+    <% order_items = order.order_items %>
+    <% avg_progress = order_items.collect(&:progress).sum.to_f / order_items.length %>
+    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+         style="width: <%= avg_progress * 25 %>%; min-width: 4em;">
+      <%= avg_progress * 25 %>%
+    </div>
+  </div>
+</div>

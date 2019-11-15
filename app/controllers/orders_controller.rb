@@ -6,6 +6,22 @@ class OrdersController < ApplicationController
     # @user = current_user
     @user = User.find(params[:id])
     @orders = @user.orders.paginate(:page => params[:page], :per_page => 6)
+    @orders_not_finished = []
+    @orders_finished = []
+    @user.orders.each do |item|
+      is_finished = true
+      item.order_items.each do |sub_item|
+        if sub_item.progress < 4
+          is_finished = false
+          break
+        end
+      end
+      if is_finished
+        @orders_finished.append(item)
+      else
+        @orders_not_finished.append(item)
+      end
+    end
   end
 
   def show
@@ -48,9 +64,9 @@ class OrdersController < ApplicationController
       @order_buyer.save
       @order_seller = Order.new(link_order_id: @order_buyer.id, receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
       @order_seller.save
-      @first = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id)
+      @first = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id, progress: 0)
       @first.save
-      @second = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id, corresponding_id: @first.id)
+      @second = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id, corresponding_id: @first.id, progress: 0)
       @second.save
       @first.update(:corresponding_id=>@second.id)
       flash[:success] = "it has been added to your order!"
@@ -87,9 +103,9 @@ class OrdersController < ApplicationController
           @order_seller.save
           created_order[@product.shop_id] = @order_seller.id
         end
-        @first=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id)
+        @first=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id, progress: 0)
         @first.save
-        @second=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id], corresponding_id: @first.id)
+        @second=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id], corresponding_id: @first.id, progress: 0)
         @second.save
         @first.update(:corresponding_id=>@second.id)
         t.destroy

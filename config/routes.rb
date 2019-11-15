@@ -64,6 +64,8 @@ Rails.application.routes.draw do
 
   post '/search', to: 'search_results#search', as: 'search_results_display'
 
+  get '/orders/:order_id/:order_item_id/update_status', to: 'order_items#update_status', as: 'update_order_status'
+
   resources :users
   resources :shops
   resources :products
