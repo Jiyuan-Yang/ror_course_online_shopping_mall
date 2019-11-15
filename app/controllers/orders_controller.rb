@@ -60,15 +60,28 @@ class OrdersController < ApplicationController
     if lack_info != []
       flash[:danger] = "Please add your " + lack_info.inject { |all_info, info| all_info + ', ' + info }
     else
-      @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
+      @order_buyer = Order.new(receiver_name: current_user.receiver_name,
+                               receiver_address: current_user.receiver_address,
+                               receiver_phone_number: current_user.receiver_phone_number,
+                               order_time: Time.now, user_id: current_user.id,
+                               total_price: @product.price)
       @order_buyer.save
-      @order_seller = Order.new(link_order_id: @order_buyer.id, receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
+      @order_seller = Order.new(link_order_id: @order_buyer.id,
+                                receiver_name: current_user.receiver_name,
+                                receiver_address: current_user.receiver_address,
+                                receiver_phone_number: current_user.receiver_phone_number,
+                                order_time: Time.now, user_id: @seller.id,
+                                total_price: @product.price)
       @order_seller.save
-      @first = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_buyer.id, progress: 0)
+      @first = OrderItem.new(product_id: @product.id, amount: 1,
+                             order_id: @order_buyer.id, progress: 0,
+                             total_price: @product.price)
       @first.save
-      @second = OrderItem.new(product_id: @product.id, amount: 1, order_id: @order_seller.id, corresponding_id: @first.id, progress: 0)
+      @second = OrderItem.new(product_id: @product.id, amount: 1,
+                              order_id: @order_seller.id, corresponding_id: @first.id, progress: 0,
+                              total_price: @product.price)
       @second.save
-      @first.update(:corresponding_id=>@second.id)
+      @first.update(:corresponding_id => @second.id)
       flash[:success] = "it has been added to your order!"
     end
     redirect_to(@product)
@@ -89,9 +102,15 @@ class OrdersController < ApplicationController
       flash[:danger] = "Please add your " + lack_info.inject { |all_info, info| all_info + ', ' + info }
     else
       @shopping_cart = current_user.shopping_cart
-      @order_buyer = Order.new(receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: current_user.id)
+      @order_buyer = Order.new(receiver_name: current_user.receiver_name,
+                               receiver_address: current_user.receiver_address,
+                               receiver_phone_number: current_user.receiver_phone_number,
+                               order_time: Time.now,
+                               user_id: current_user.id)
       @order_buyer.save
+      buyer_order_value_cnt = 0.0
       created_order = Hash.new
+      order_seller_list = []
 
       @shopping_cart.shopping_cart_items.each do |t|
         @product = t.product
@@ -99,17 +118,37 @@ class OrdersController < ApplicationController
         @seller = User.find(@shop.user_id)
 
         if !created_order.has_key?(@product.shop_id)
-          @order_seller = Order.new(link_order_id: @order_buyer.id, receiver_name: current_user.receiver_name, receiver_address: current_user.receiver_address, receiver_phone_number: current_user.receiver_phone_number, order_time: Time.now, user_id: @seller.id)
+          @order_seller = Order.new(link_order_id: @order_buyer.id,
+                                    receiver_name: current_user.receiver_name,
+                                    receiver_address: current_user.receiver_address,
+                                    receiver_phone_number: current_user.receiver_phone_number,
+                                    order_time: Time.now,
+                                    user_id: @seller.id)
+          order_seller_list.append(@order_seller)
           @order_seller.save
           created_order[@product.shop_id] = @order_seller.id
         end
-        @first=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: @order_buyer.id, progress: 0)
+        @first = OrderItem.new(product_id: @product.id, amount: t.amount,
+                               order_id: @order_buyer.id, progress: 0,
+                               total_price: t.amount * @product.price)
         @first.save
-        @second=OrderItem.new(product_id: @product.id, amount: t.amount, order_id: created_order[@product.shop_id], corresponding_id: @first.id, progress: 0)
+        @second = OrderItem.new(product_id: @product.id, amount: t.amount,
+                                order_id: created_order[@product.shop_id],
+                                corresponding_id: @first.id, progress: 0,
+                                total_price: t.amount * @product.price)
+        buyer_order_value_cnt += t.amount * @product.price
         @second.save
-        @first.update(:corresponding_id=>@second.id)
+        @first.update(:corresponding_id => @second.id)
         t.destroy
         flash[:success] = "it has been added to your order!"
+      end
+      @order_buyer.update(total_price: buyer_order_value_cnt)
+      order_seller_list.each do |item|
+        seller_order_value_cnt = 0
+        item.order_items.each do |sub_item|
+          seller_order_value_cnt += sub_item.total_price
+        end
+        item.update(total_price: seller_order_value_cnt)
       end
     end
     redirect_to(user_shopping_cart_path(current_user.id))
