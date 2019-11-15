@@ -5,19 +5,19 @@
       <form class="navbar-form navbar-right search_bar" role="search"
         action="/search" method="post">
         <div class="form-group">
-          <input type="text" name="keyword" class="form-control" placeholder="Search">
+          <input type="text" name="keyword" class="form-control" placeholder="输入关键词...">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">搜索</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to "Home", root_path %></li>
-        <li><%= link_to "Help", help_path %></li>
+          <%= link_to "主页", root_path %></li>
+        <li><%= link_to "使用帮助", help_path %></li>
         <% if logged_in? %>
           <% if get_user_character == 'administrator' %>
-            <li><%= link_to "All Users", all_users_path %></li>
-            <li><%= link_to "All Shops", all_shops_path %></li>
-            <li><%= link_to "All Orders", all_orders_path %></li>
+            <li><%= link_to "全部用户", all_users_path %></li>
+            <li><%= link_to "全部店铺", all_shops_path %></li>
+            <li><%= link_to "全部订单", all_orders_path %></li>
           <% end %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b>
@@ -26,46 +26,46 @@
               <% if get_user_character == 'seller' %>
                 <li>
                   <%= link_to user_shop_path(current_user.id) do %>
-                    Shops
+                    我的店铺
                     <span class="badge"><%= @current_user.shops.count() %></span>
                   <% end %>
                 </li>
                 <li>
                   <%= link_to list_orders_path(current_user.id) do %>
-                    Orders of Shops
+                    店铺订单
                     <span class="badge"><%= @current_user.orders.count() %></span>
                   <% end %>
                 </li>
               <% elsif get_user_character == 'buyer' %>
                 <li>
                   <%= link_to user_shopping_cart_path(current_user.id) do %>
-                    Shopping Cart
+                    购物车
                     <span class="badge"><%= @current_user.shopping_cart.shopping_cart_items.count() %></span>
                   <% end %>
                 </li>
                 <li>
                   <%= link_to user_favorite_path(current_user.id) do %>
-                    Favorites
+                    个人收藏
                     <span class="badge"><%= @current_user.favorite.favorite_items.count() %></span>
                   <% end %>
                 </li>
                 <li>
                   <%= link_to list_orders_path(current_user.id) do %>
-                    Orders
+                    我的订单
                     <span class="badge"><%= @current_user.orders.count() %></span>
                   <% end %>
                 </li>
               <% end %>
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li><%= link_to "个人信息", current_user %></li>
+              <li><%= link_to "设置", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "Log out", logout_path, method: :delete %>
+                <%= link_to "注销", logout_path, method: :delete %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to "登陆", login_path %></li>
         <% end %>
       </ul>
     </nav>
