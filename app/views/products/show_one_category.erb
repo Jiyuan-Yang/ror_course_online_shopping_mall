@@ -3,13 +3,16 @@
 <div>
   <% if @products.any? %>
     <div class="container-fluid">
-      <div class="row table_head">
-        <div class="col-md-3">  product id  </div>
-        <div class="col-md-3"> product name  </div>
-        <div class="col-md-3"> description  </div>
-        <div class="col-md-3"> price  </div>
-      </div>
-      <%= render @products %>
+      <table class="table table-striped">
+        <tr>
+          <td class="col-md-2">商品ID</td>
+          <td class="col-md-2">商品名</td>
+          <td class="col-md-4">商品描述</td>
+          <td class="col-md-2">商品价格</td>
+          <td class="col-md-2">操作</td>
+        </tr>
+        <%= render @products %>
+      </table>
       <%= will_paginate %>
     </div>
   <% end %>

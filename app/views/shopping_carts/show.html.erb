@@ -3,19 +3,21 @@
 
 <div>
   <% if @user.shopping_cart.shopping_cart_items.any? %>
-    <div class="container-fluid ">
-      <div class="row table_head">
-        <div class="col-md-4">
-          product
-        </div>
-        <div class="col-md-4">
-          price
-        </div>
-        <div class="col-md-4">
-          number
-        </div>
-      </div>
+    <div class="container-fluid">
+      <table class="table table-striped">
+        <tr>
+        <td class="col-md-4">
+          <h3>商品名</h3>
+        </td>
+        <td class="col-md-4">
+          <h3>商品价格</h3>
+        </td>
+        <td class="col-md-4">
+          <h3>数量</h3>
+        </td>
+        </tr>
       <%= render @shopping_cart_items %>
+      </table>
     </div>
     <%= will_paginate @shopping_cart_items %>
   <% end %>
@@ -26,8 +28,34 @@
   <div class="row">
     <div>
       <% if @user.shopping_cart.shopping_cart_items.count > 0 %>
-        <%= link_to '<button class="btn btn-success btn-lg">购买全部</button>'.html_safe,
-                    add_items_in_shopping_cart_to_order_path, method: :post %>
+        <div class="jumbotron">
+          <h3>购物车小计</h3>
+          <br/>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">总商品数</h3>
+            </div>
+            <div class="panel-body">
+              <%= @user.shopping_cart.shopping_cart_items.count %>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">总价格</h3>
+            </div>
+            <div class="panel-body">
+              <% value_sum = 0 %>
+              <% @user.shopping_cart.shopping_cart_items.each do |item| %>
+                <% value_sum += item.amount * item.product.price %>
+              <% end %>
+              <%= value_sum %>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <%= link_to '<button class="btn btn-primary">购买全部</button>'.html_safe,
+                      add_items_in_shopping_cart_to_order_path, method: :post %>
+        </div>
       <% else %>
         <div class="jumbotron">
           <h1>Oops!</h1>

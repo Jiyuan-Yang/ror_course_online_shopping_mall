@@ -1,18 +1,52 @@
-<h1>this is the search result for</h1>
-<h2><%= @keyword %></h2>
-<h3>products</h3>
+<h1>关键词搜索结果</h1>
+<h2><span class="label label-primary">关键词</span> <%= @keyword %></h2>
+<h3>商品</h3>
 <% if @product_result.count == 0 %>
-  <div>no product found</div>
+  <div class="jumbotron">未能检索到符合条件的店铺</div>
 <% else %>
-  <% @product_result.each do |item| %>
-    <div><%= item.id %>|<%= item.name %></div>
-  <% end %>
+  <div class="container-fluid">
+    <table class="table table-striped">
+      <tr>
+        <td class="col-md-2">商品ID</td>
+        <td class="col-md-2">商品名</td>
+        <td class="col-md-4">商品描述</td>
+        <td class="col-md-2">商品价格</td>
+        <td class="col-md-2">操作</td>
+      </tr>
+      <% @product_result.each do |product| %>
+        <tr>
+          <td class="col-md-2"><%= product.id %> </td>
+          <td class="col-md-2"><%= product.name %></td>
+          <td class="col-md-4"><%= product.description %> </td>
+          <td class="col-md-2"><%= product.price %> </td>
+          <td class="col-md-2"><%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe,
+                                           product_path(product.id) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 <% end %>
-<h3>shops</h3>
+<h3>店铺</h3>
 <% if @shop_result.count == 0 %>
-  <div>no shop found</div>
+  <div class="jumbotron">未能检索到符合条件的商店</div>
 <% else %>
-  <% @shop_result.each do |item| %>
-    <div><%= item.id %>|<%= item.name %></div>
-  <% end %>
+  <table class="table table-striped">
+    <tr>
+      <th class="col-md-2">店铺ID</th>
+      <th class="col-md-4">店铺名称</th>
+      <th class="col-md-4">店铺描述</th>
+      <th class="col-md-2">操作</th>
+    </tr>
+    <% @shop_result.each do |shop| %>
+      <tr>
+        <td class="col-md-2"> <%= shop.id %> </td>
+        <td class="col-md-4"> <%= shop.name %> </td>
+        <td class="col-md-4"> <%= shop.description %> </td>
+        <td class="col-md-2">
+          <%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe,
+                      show_shop_get_path(shop_id: shop.id) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
