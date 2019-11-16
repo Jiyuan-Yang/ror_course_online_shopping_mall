@@ -1,5 +1,5 @@
-<% provide(:title, 'favorites') %>
-<h1><%= @user.name + '\'s favorites' %></h1>
+<% provide(:title, '收藏') %>
+<h1><%= @user.name + '的收藏' %></h1>
 
 <% if @user.favorite.favorite_items.any? %>
   <div class="container-fluid">
@@ -16,5 +16,16 @@
   <%= will_paginate @favorite_items %>
 <% end %>
 <% if @user.favorite.favorite_items.count == 0 %>
-  <div>click <%= link_to 'here', '#' %> to see all of the products</div>
+  <div class="jumbotron">
+    <h1>Oops!</h1>
+    <p>您的收藏似乎是空的，去看看正在发售的商品吧。</p>
+    <p>您可以点击下面的按钮，返回主页，分类查看商品，我们有数十类商品供您选择，收藏它们，获取最新动态！</p>
+    <p>已经有想要的商品了？在导航栏的搜索框，输入商品名称搜搜看！</p>
+    <br/>
+    <br/>
+    <br/>
+    <div class="text-center">
+      <%= link_to '<button class="btn btn-primary btn-lg">回到主页，查找商品</button>'.html_safe, root_path %>
+    </div>
+  </div>
 <% end %>

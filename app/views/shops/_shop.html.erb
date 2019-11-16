@@ -1,8 +1,9 @@
-<div class="row shop">
-  <div class="col-md-2"> <%= shop.id %> </div>
-  <div class="col-md-4"> <%= link_to shop.name, show_shop_get_path(shop_id: shop.id) %> </div>
-  <div class="col-md-4"> <%= shop.description %> </div>
-  <div class="col-md-2">
-    <%= link_to '<button class="btn btn-danger"> delete </button>'.html_safe, show_shop_get_path(shop_id: shop.id), method: :delete, data: {confirm: 'Are you sure?'} %>
-  </div>
-</div>
+<tr>
+  <td class="col-md-2"> <%= shop.id %> </td>
+  <td class="col-md-4"> <%= shop.name %> </td>
+  <td class="col-md-4"> <%= shop.description %> </td>
+  <td class="col-md-2">
+    <%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe, show_shop_get_path(shop_id: shop.id) %>
+    <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe, show_shop_get_path(shop_id: shop.id), method: :delete, data: {confirm: 'Are you sure?'} %>
+  </td>
+</tr>

@@ -1,5 +1,5 @@
-<% provide(:title, @user.name + '\'s shops') %>
-<h1>this is the place for user the take a look at there shops</h1>
+<% provide(:title, '店铺列表') %>
+<h1><%= @user.name + '的店铺列表' %></h1>
 <% if @user.shops.count == 0 %>
   <div>
     it seems that you don't have any shops,
@@ -7,15 +7,20 @@
   </div>
 <% else %>
   <div class="container-fluid">
-    <div class="row table_head">
-      <div class="col-md-2"> shop id</div>
-      <div class="col-md-4"> shop.name</div>
-      <div class="col-md-4"> description</div>
-      <div class="col-md-2"> delete</div>
-    </div>
-    <%= render @shops %>
+
+    <table class="table table-striped">
+      <tr>
+        <th class="col-md-2">店铺ID</th>
+        <th class="col-md-4">店铺名称</th>
+        <th class="col-md-4">店铺描述</th>
+        <th class="col-md-2">操作</th>
+      </tr>
+      <%= render @shops %>
+    </table>
   </div>
   <%= will_paginate @shops %>
 
-  <div><%= link_to '<button class="btn btn-success">create a shop</button>'.html_safe, create_shop_get_path %> </div>
+  <div class="text-center">
+    <%= link_to '<button class="btn btn-primary">创建店铺</button>'.html_safe, create_shop_get_path %>
+  </div>
 <% end %>
