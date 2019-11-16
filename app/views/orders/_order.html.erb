@@ -6,9 +6,9 @@
     <%= order.total_price %>
   </td>
   <td class="col-md-6">
-    <%= link_to '<button class="btn btn-primary">details</button>'.html_safe, order %>
-    <%= link_to '<button class="btn btn-danger">delete</button>'.html_safe, order_destroy_path(order_id: order.id), method: :delete,
-                data: {confirm: 'Are you sure?'} %>
+    <%= link_to '<button class="btn btn-primary">详情</button>'.html_safe, order %>
+    <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe, order_destroy_path(order_id: order.id), method: :delete,
+                data: {confirm: '您确定要删除吗?'} %>
   </td>
 </tr>
 <tr>
