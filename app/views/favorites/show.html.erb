@@ -3,15 +3,20 @@
 
 <% if @user.favorite.favorite_items.any? %>
   <div class="container-fluid">
-    <div class="row table_head">
-      <div class="col-md-4">
-        product
-      </div>
-      <div class="col-md-4">
-        user_id
-      </div>
-    </div>
-    <%= render @favorite_items %>
+    <table class="table table-striped">
+      <tr>
+        <td class="col-md-4">
+          商品名
+        </td>
+        <td class="col-md-4">
+          店铺名
+        </td>
+        <td class="col-md-4">
+          操作
+        </td>
+      </tr>
+      <%= render @favorite_items %>
+    </table>
   </div>
   <%= will_paginate @favorite_items %>
 <% end %>
