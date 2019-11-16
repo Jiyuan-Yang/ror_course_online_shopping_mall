@@ -1,26 +1,29 @@
-<div class="order row">
-  <div class="col-md-2">
-    #<%= order.id %>
+<tr>
+  <td class="col-md-3">
+    <%= order.id %>
+  </td>
+  <td class="col-md-3">
     <%= order.total_price %>
-  </div>
-
-  <div class="col-md-offset-8">
-    <%= link_to '<button class="btn">details</button>'.html_safe, order %>
+  </td>
+  <td class="col-md-6">
+    <%= link_to '<button class="btn btn-primary">details</button>'.html_safe, order %>
     <%= link_to '<button class="btn btn-danger">delete</button>'.html_safe, order_destroy_path(order_id: order.id), method: :delete,
                 data: {confirm: 'Are you sure?'} %>
-  </div>
-</div>
-<div class="order_progress row">
-  <div class="progress">
-    <% order_items = order.order_items %>
-    <% if order_items.length == 0 %>
-      <% avg_progress = 0 %>
-    <% else %>
-      <% avg_progress = order_items.collect(&:progress).sum.to_f / order_items.length %>
-    <% end %>
-    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-         style="width: <%= avg_progress * 25 %>%; min-width: 4em;">
-      <%= avg_progress * 25 %>%
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    <div class="progress">
+      <% order_items = order.order_items %>
+      <% if order_items.length == 0 %>
+        <% avg_progress = 0 %>
+      <% else %>
+        <% avg_progress = order_items.collect(&:progress).sum.to_f / order_items.length %>
+      <% end %>
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+           style="width: <%= avg_progress * 25 %>%; min-width: 4em;">
+        <%= avg_progress * 25 %>%
+      </div>
     </div>
-  </div>
-</div>
+  </td>
+</tr>

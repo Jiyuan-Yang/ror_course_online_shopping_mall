@@ -3,18 +3,35 @@
 <div>
   <% if @user.orders.any? %>
     <div class="container-fluid">
-      <div class="row table_head">
-        <div class="col-md-2">
-          order number
-        </div>
-        <div class="col-md-offset-8">
-          operation
-        </div>
-      </div>
-      <div>not finished</div>
-      <%= render @orders_not_finished %>
-      <div>finished</div>
-      <%= render @orders_finished %>
+      <table class="table table-striped">
+        <tr>
+          <td class="col-md-3">
+            订单号
+          </td>
+          <td class="col-md-3">
+            订单总价
+          </td>
+          <td class="col-md-6">
+            操作
+          </td>
+        </tr>
+        <%= render @orders_not_finished %>
+      </table>
+
+      <table class="table table-striped">
+        <tr>
+          <td class="col-md-3">
+            订单号
+          </td>
+          <td class="col-md-3">
+            订单总价
+          </td>
+          <td class="col-md-6">
+            操作
+          </td>
+        </tr>
+        <%= render @orders_finished %>
+      </table>
     </div>
     <%= will_paginate %>
   <% end %>

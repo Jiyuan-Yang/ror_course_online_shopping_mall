@@ -1,39 +1,40 @@
-<div class="row order_item">
-  <div class="col-md-4"> <%= order_item.product.name %></div>
-  <div class="col-md-4"> <%= order_item.amount %></div>
+<tr>
+  <td class="col-md-4"> <%= order_item.product.name %></td>
+  <td class="col-md-4"> <%= order_item.amount %></td>
   <% if current_user.character == 'seller' %>
-    <div class="col-md-2">
+    <td class="col-md-2">
+      <% status_map = %w(发货 装车 派件 等待确认收货 完成) %>
       <% if order_item.progress <= 2 %>
-        <%= link_to '<button class="btn btn-success">update</button>'.html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
+        <%= link_to "<button class=\"btn btn-success\">#{status_map[order_item.progress]}</button>".html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
       <% else %>
-        <%= link_to '<button class="btn btn-success" disabled="disabled">update</button>'.html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
+        <%= link_to "<button class=\"btn btn-success\" disabled=\"disabled\">#{status_map[order_item.progress]}</button>".html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
       <% end %>
-    </div>
-    <div class="col-md-2">
-      <%= link_to '<button class="btn btn-danger">delete</button>'.html_safe, order_item_destroy_path(order_item.order.id, order_item.id), method: :delete %>
-    </div>
+    </td>
+    <td class="col-md-2">
+      <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe, order_item_destroy_path(order_item.order.id, order_item.id), method: :delete %>
+    </td>
   <% else %>
-    <div class="col-md-2">
+    <td class="col-md-2">
       <% if order_item.progress == 3 %>
-        <%= link_to '<button class="btn btn-success">update</button>'.html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
+        <%= link_to '<button class="btn btn-success">确认收货</button>'.html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
       <% else %>
-        <%= link_to '<button class="btn btn-success" disabled="disabled">update</button>'.html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
+        <%= link_to '<button class="btn btn-success" disabled="disabled">确认收货</button>'.html_safe, update_order_status_path(order_item.order.id, order_item_id: order_item.id) %>
       <% end %>
-    </div>
-    <div class="col-md-2">
-      <%= link_to '<button class="btn btn-danger">delete</button>'.html_safe, order_item_destroy_path(order_item.order.id, order_item.id), method: :delete %>
-    </div>
+    </td>
+    <td class="col-md-2">
+      <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe, order_item_destroy_path(order_item.order.id, order_item.id), method: :delete %>
+    </td>
   <% end %>
-</div>
-<div class="row order_item_progress">
-  <div class="col-md-11">
+</tr>
+<tr>
+  <td class="col-md-11" colspan="3">
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= order_item.progress * 25 %>%; min-width: 4em;">
         <%= order_item.progress * 25 %>%
       </div>
     </div>
-  </div>
-  <div class="col-md-1">
+  </td>
+  <td class="col-md-1" colspan="1">
     <% if order_item.progress == 0 %>
       <div>等待发货</div>
     <% elsif order_item.progress == 1 %>
@@ -45,5 +46,5 @@
     <% else %>
       <div>已收货</div>
     <% end %>
-  </div>
-</div>
+  </td>
+</tr>

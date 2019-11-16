@@ -2,12 +2,16 @@
 <h1><%= @user.name %>'s Order #<%= @order.id %></h1>
 <% if @order.order_items.any? %>
   <div class="container-fluid">
-    <div class="row table_head">
-      <div class="col-md-4"> product</div>
-      <div class="col-md-4"> amount</div>
-    </div>
-    <%= render @order_items %>
-    <%= will_paginate @order_items%>
+    <table class="table table-striped">
+      <tr>
+        <td class="col-md-4">商品名</td>
+        <td class="col-md-4">商品数量</td>
+        <td class="col-md-4" colspan="2">操作</td>
+      </tr>
+      <%= render @order_items %>
+      <%= will_paginate @order_items %>
+    </table>
+
   </div>
 <% end %>
 
