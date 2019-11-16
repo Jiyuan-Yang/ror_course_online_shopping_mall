@@ -1,4 +1,4 @@
-<% provide(:title, 'Shop') %>
+<% provide(:title, '店铺详情') %>
 
 <h1><%= @shop.name %></h1>
 
@@ -6,32 +6,38 @@
 
 
 <% if @shop.products.count == 0 %>
-  <div>
-    it seems that you don't have any products,
-    <%= link_to "click here", create_product_get_path(shop_id: @shop.id) %> to create you product!
+  <div class="jumbotron">
+    <h1>Oops!</h1>
+    <p>您的店铺里好像还没有商品。</p>
+    <p>在the Max Jim's，只要您获得了备案许可，在遵守各项法律法规的前提下，您可以在店铺里自由地创建商品。</p>
+    <p>点击下面的按钮，即刻创建！</p>
+    <br/>
+    <br/>
+    <br/>
+    <div class="text-center">
+      <%= link_to '<button class="btn btn-primary btn-lg">创建商品</button>'.html_safe,
+                  create_product_get_path(shop_id: @shop.id) %>
+    </div>
   </div>
 <% else %>
   <% if @shop.products.any? %>
     <div class="container-fluid">
-      <div class="row table_head">
-        <div class="col-md-3">
-          product id
-        </div>
-        <div class="col-md-3">
-          name
-        </div>
-        <div class="col-md-3">
-          description
-        </div>
-        <div class="col-md-3">
-          price
-        </div>
-      </div>
-      <%= render @products %>
+      <table class="table table-striped">
+        <tr>
+          <th class="col-md-2">产品ID</th>
+          <th class="col-md-2">产品名称</th>
+          <th class="col-md-4">产品描述</th>
+          <th class="col-md-2">价格</th>
+          <th class="col-md-2">操作</th>
+        </tr>
+        <%= render @products %>
+      </table>
     </div>
     <%= will_paginate @products %>
   <% end %>
   <!-- 这里为seller访问shop和product增加了专门的路由，用于创建，对于一般用户，这里不应显示 -->
 
-  <div><%= link_to '<button class="btn btn-success">create you product</button>'.html_safe, create_product_get_path(shop_id: @shop.id) %> </div>
+  <div class="text-center">
+    <%= link_to '<button class="btn btn-success">创建产品</button>'.html_safe, create_product_get_path(shop_id: @shop.id) %>
+  </div>
 <% end %>
