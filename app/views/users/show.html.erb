@@ -1,15 +1,84 @@
-<% provide(:title, @user.name + '\'s profile') %>
+<% provide(:title, @user.name + '的个人信息') %>
 
 <div class="container">
   <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <h1>
-          <%= gravatar_for @user %>
-          <%= @user.name %>, <%= @user.email %>
-        </h1>
-        <%= link_to 'click here to see your orders', list_orders_path %>
-      </section>
+    <aside class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body">
+          <section class="user_info">
+            <div class="col-md-2">
+              <div style="margin: 25px 25px 25px 50px;">
+                <%= gravatar_for @user %>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <h4>
+                <div style="margin:20px"><%= @user.name %></div>
+                <div style="margin:20px"><%= @user.email %></div>
+                <% if @user.character == 'buyer' %>
+                  <div style="margin:20px">买家</div>
+                <% elsif @user.character == 'seller' %>
+                  <div style="margin:20px">卖家</div>
+                <% else %>
+                  <div style="margin:20px">管理员</div>
+                <% end %>
+              </h4>
+            </div>
+          </section>
+        </div>
+      </div>
+      <% if @user.character == 'buyer' %>
+        <div class="panel panel-warning">
+          <div class="panel-heading">收货信息</div>
+          <div class="panel-body">
+            <% if @user.receiver_name.blank? or @user.receiver_address.blank? or @user.receiver_phone_number.blank? %>
+              <p>您还有尚未完善的收货信息，请先完善收货信息。</p>
+              <div class="text-right">
+                <%= link_to '<button type="button" class="btn btn-primary">立即完善信息</button>'.html_safe,
+                            edit_user_path(@user) %>
+              </div>
+            <% else %>
+              <h4 style="margin-left: 50px">
+                <div style="margin: 20px">
+                  收货人姓名： <%= @user.receiver_name %>
+                </div>
+                <div style="margin: 20px">
+                  收货地址： <%= @user.receiver_address %>
+                </div>
+                <div style="margin: 20px">
+                  联系电话： <%= @user.receiver_phone_number %>
+                </div>
+              </h4>
+            <% end %>
+          </div>
+        </div>
+      <% elsif @user.character == 'seller' %>
+        <div class="panel panel-warning">
+          <div class="panel-heading">备案提示</div>
+          <div class="panel-body">
+            <p>依据相关法律法规要求，请您在创建店铺并开始营销之前，前往全国互联网安全管理服务平台进行备案，
+              依照国家法律从事营销活动，保护您的合法权益。</p>
+            <div class="panel panel-success">
+              <div class="panel-heading">备案流程</div>
+              <div class="panel-body">
+                <ul>
+                  <li>登陆全国互联网安全管理服务平台</li>
+                  <li>点击"联网备案登陆"</li>
+                  <li>提交申请</li>
+                  <li>初步审核</li>
+                  <li>预约检查</li>
+                  <li>备案完成</li>
+                </ul>
+              </div>
+            </div>
+            <div class="text-right">
+              <%= link_to '<button type="button" class="btn btn-primary">立即备案</button>'.html_safe,
+                          'http://www.beian.gov.cn/portal/index.do' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </aside>
   </div>
 </div>

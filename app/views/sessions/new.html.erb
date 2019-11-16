@@ -1,13 +1,13 @@
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
+<% provide(:title, "登陆") %>
+<h1>登陆</h1>
 <div class="row forms">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(:session, url: login_path) do |f| %>
-      <%= f.label :email %>
+      <%= f.label :email, "电子邮件" %>
       <%= f.email_field :email, class: 'form-control' %>
-      <%= f.label :password %>
+      <%= f.label :password, "密码" %>
       <%= f.password_field :password, class: 'form-control' %>
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <%= f.submit "登陆", class: "btn btn-primary" %>
     <% end %>
-    <p>New user? <%= link_to "Sign up now!", sign_up_path %></p></div>
+    <p>新用户? <%= link_to "立即注册!", sign_up_path %></p></div>
 </div>

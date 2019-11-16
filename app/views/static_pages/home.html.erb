@@ -1,21 +1,55 @@
-<% provide(:title, 'Home') %>
+<% provide(:title, '主页') %>
 <h1> the Max Jim's </h1>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-2">
-      <div class="list-group category">
-        <a href="/category/animal" class="list-group-item category">animal</a>
-        <a href="/category/fruit" class="list-group-item category">fruit</a>
-        <a href="/category/t1" class="list-group-item category">t1</a>
-        <a href="/category/t2" class="list-group-item category">t2</a>
-        <a href="/category/t3" class="list-group-item category">t3</a>
-        <a href="/category/t4" class="list-group-item category">t4</a>
-        <a href="/category/t5" class="list-group-item category">t5</a>
-        <a href="/category/t6" class="list-group-item category">t6</a>
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/category/clothes" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-sunglasses" aria-hidden="true"></span> 服装
+          </h4>
+          <p class="list-group-item-text">精选男装/女装/童装</p>
+        </a>
+        <a href="/category/fruit" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-book" aria-hidden="true"></span> 书籍
+          </h4>
+          <p class="list-group-item-text">热门畅销书/原版书/电子书</p>
+        </a>
+        <a href="/category/t1" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-briefcase" aria-hidden="true"></span> 办公用品
+          </h4>
+          <p class="list-group-item-text">笔/笔芯/信纸/草稿纸</p>
+        </a>
+        <a href="/category/t2" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-hdd" aria-hidden="true"></span> 电子产品
+          </h4>
+          <p class="list-group-item-text">手机/平板/笔记本/台式机</p>
+        </a>
+        <a href="/category/t3" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-headphones" aria-hidden="true"></span> 休闲娱乐
+          </h4>
+          <p class="list-group-item-text">蓝牙耳机/游戏机/游戏货币</p>
+        </a>
+        <a href="/category/t4" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-leaf" aria-hidden="true"></span> 植物/动物
+          </h4>
+          <p class="list-group-item-text">草本植物/室内植物/猫</p>
+        </a>
+        <a href="/category/t5" class="list-group-item">
+          <h4 class="list-group-item-heading">
+            <span class="glyphicon glyphicon glyphicon-cloud" aria-hidden="true"></span> 虚拟商品
+          </h4>
+          <p class="list-group-item-text">正版Office/正版Adobe系列授权</p>
+        </a>
       </div>
     </div>
-    <div class="col-md-offset-2">
+    <div class="col-md-offset-3">
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -27,19 +61,19 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <div class="center"> <%= link_to image_tag('0.png', alt: '0', size:"975x400") %> </div>
+            <div class="center"> <%= link_to image_tag('0.png', alt: '0', size: "900x455") %> </div>
             <div class="carousel-caption">
               欢迎访问 the Max Jim's
             </div>
           </div>
           <div class="item">
-            <div class="center"> <%= link_to image_tag('1.png', alt: '1', size:"975x400") %></div>
+            <div class="center"> <%= link_to image_tag('1.png', alt: '1', size: "900x455") %></div>
             <div class="carousel-caption">
               即刻注册账户
             </div>
           </div>
           <div class="item">
-            <div class="center"> <%= link_to image_tag('2.png', alt: '2', size:"975x400") %></div>
+            <div class="center"> <%= link_to image_tag('2.png', alt: '2', size: "900x455") %></div>
             <div class="carousel-caption">
               即刻创建店铺
             </div>

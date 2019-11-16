@@ -20,7 +20,7 @@
             <li><%= link_to "全部订单", all_orders_path %></li>
           <% end %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 我的账户 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <% if get_user_character == 'seller' %>
@@ -65,7 +65,7 @@
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "登陆", login_path %></li>
+          <li><%= link_to "登陆/注册", login_path %></li>
         <% end %>
       </ul>
     </nav>
