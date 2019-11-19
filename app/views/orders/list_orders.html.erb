@@ -3,35 +3,44 @@
 <div>
   <% if @user.orders.any? %>
     <div class="container-fluid">
-      <table class="table table-striped">
-        <tr>
-          <td class="col-md-3">
-            订单号
-          </td>
-          <td class="col-md-3">
-            订单总价
-          </td>
-          <td class="col-md-6">
-            操作
-          </td>
-        </tr>
-        <%= render @orders_not_finished %>
-      </table>
-
-      <table class="table table-striped">
-        <tr>
-          <td class="col-md-3">
-            订单号
-          </td>
-          <td class="col-md-3">
-            订单总价
-          </td>
-          <td class="col-md-6">
-            操作
-          </td>
-        </tr>
-        <%= render @orders_finished %>
-      </table>
+      <div class="panel panel-primary">
+        <div class="panel-heading">正在进行的订单</div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tr>
+              <td class="col-md-3">
+                订单号
+              </td>
+              <td class="col-md-3">
+                订单总价
+              </td>
+              <td class="col-md-6">
+                操作
+              </td>
+            </tr>
+            <%= render @orders_not_finished %>
+          </table>
+        </div>
+      </div>
+      <div class="panel panel-success">
+        <div class="panel-heading">已完成的订单</div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tr>
+              <td class="col-md-3">
+                订单号
+              </td>
+              <td class="col-md-3">
+                订单总价
+              </td>
+              <td class="col-md-6">
+                操作
+              </td>
+            </tr>
+            <%= render @orders_finished %>
+          </table>
+        </div>
+      </div>
     </div>
     <%= will_paginate %>
   <% end %>
