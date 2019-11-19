@@ -13,10 +13,10 @@ class ShoppingCartsController < ApplicationController
     @item = ShoppingCartItem.new(amount: 1, shopping_cart_id: current_user.shopping_cart.id,
                          product_id: params[:id])
     if @item.save
-      flash[:success] = "It has been added to your shopping cart!"
+      flash[:success] = "成功添加商品到购物车中!"
       redirect_to product_path(params[:id])
     else
-      flash[:danger] = "It's already in your shopping cart!"
+      flash[:danger] = "该商品已经在您的购物车中!"
       redirect_to product_path(params[:id])
     end
   end

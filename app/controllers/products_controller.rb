@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   def create
     @product = Shop.find(params[:shop_id]).products.build(product_params)
     if @product.save
-      flash[:success] = "Your product \"#{product_params[:name]}\" is ready!"
+      flash[:success] = "您的商品 \"#{product_params[:name]}\" 已经上架!"
       redirect_to show_shop_get_path # equals to `redirect_to user_url(@user)`
       # Attention shops_url is the overall view of shop, shop_url is the user's
     else

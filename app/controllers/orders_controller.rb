@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
                               total_price: @product.price)
       @second.save
       @first.update(:corresponding_id => @second.id)
-      flash[:success] = "it has been added to your order!"
+      flash[:success] = "您已购买该商品！"
     end
     redirect_to(@product)
   end
@@ -140,7 +140,7 @@ class OrdersController < ApplicationController
         @second.save
         @first.update(:corresponding_id => @second.id)
         t.destroy
-        flash[:success] = "it has been added to your order!"
+        flash[:success] = "您已成功购买购物车中的商品！"
       end
       @order_buyer.update(total_price: buyer_order_value_cnt)
       order_seller_list.each do |item|

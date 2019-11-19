@@ -20,7 +20,7 @@ class ShoppingCartItemsController < ApplicationController
     @item = ShoppingCartItem.find(params[:cart_item_id])
     name = Product.find(@item.product_id).name
     @item.destroy
-    flash[:success] = "Shopping cart item #{name} deleted!"
+    flash[:success] = "#{name}已经从您的购物车中成功删除!"
     redirect_to(user_shopping_cart_path(id: params[:id]))
   end
 end

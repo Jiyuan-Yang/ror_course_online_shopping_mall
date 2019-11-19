@@ -26,7 +26,7 @@ class ShopsController < ApplicationController
     # @shop = current_user.shops.build(shop_params)
     @shop = User.find(params[:id]).shops.build(shop_params)
     if @shop.save
-      flash[:success] = "Your shop \"#{shop_params[:name]}\" is ready!"
+      flash[:success] = "您的商店 \"#{shop_params[:name]}\" 已经创建!"
       redirect_to user_shop_path(params[:id]) # equals to `redirect_to user_url(@user)`
       # Attention shops_url is the overall view of shop, shop_url is the user's
     else
@@ -39,7 +39,7 @@ class ShopsController < ApplicationController
     user_name = @shop.user.name
     shop_name = @shop.name
     @shop.destroy
-    flash[:success] = "User #{user_name}'s shop #{shop_name} has been destroyed!"
+    flash[:success] = "用户#{user_name}的商店#{shop_name}已经成功注销!"
     redirect_to(user_shop_path(params[:id]))
   end
 

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       end
 
       log_in(@user)
-      flash[:success] = "Welcome to the Max Jim's"
+      flash[:success] = "欢迎登陆 Max Jim's"
       redirect_to(@user)
     else
       render("new")
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
-      flash[:success] = "Edit Successfully!"
+      flash[:success] = "成功修改!"
       redirect_to(@user)
     else
       render("edit")
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     name = @user.name
     @user.destroy
-    flash[:success] = "User #{name} has been destroyed!"
+    flash[:success] = "用户#{name}已经成功删除!"
     redirect_to(all_users_path)
   end
 

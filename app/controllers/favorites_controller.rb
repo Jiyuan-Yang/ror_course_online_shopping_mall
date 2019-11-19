@@ -11,10 +11,10 @@ class FavoritesController < ApplicationController
   def add_to_favorite
     @item = FavoriteItem.new(product_id: params[:id], favorite_id: current_user.favorite.id)
     if @item.save
-      flash[:success] = "It has been added to your favorite!"
+      flash[:success] = "成功添加商品到收藏夹中!"
       redirect_to product_path(params[:id])
     else
-      flash[:danger] = "It is already in your favorite!"
+      flash[:danger] = "该商品已经在您的收藏夹中!"
       redirect_to product_path(params[:id])
     end
   end

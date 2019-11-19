@@ -25,10 +25,10 @@ class OrderItemsController < ApplicationController
     if @order.order_items.empty?
       @order.destroy
       redirect_to @user
-      flash[:success] = "the order_item and the empty order have been deleted successfully!"
+      flash[:success] = "订单项和空订单已经成功删除!"
     else
       redirect_to @order
-      flash[:success] = "the order_item has been deleted successfully!"
+      flash[:success] = "订单项已经成功删除!"
     end
     if @another_order.order_items.empty?
       @another_order.destroy
