@@ -1,7 +1,7 @@
 <% provide(:title, '月购买量报表') %>
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="width: 600px;height:400px;"></div>
+<div id="main" style="width: 1200px;height:600px;"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -11,24 +11,61 @@
         title: {
             text: '月购买量'
         },
-        tooltip: {},
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross'
+            }
+        },
+        toolbox: {
+            feature: {
+                dataView: {show: true, readOnly: false},
+                saveAsImage: {show: true}
+            }
+        },
         legend: {
-            data: ['购买金额','购买量']
+            data: ['购买金额', '购买量']
         },
         xAxis: {
             data: <%=@days %>
         },
-        yAxis: {},
+        yAxis: [
+            {
+                type: 'value',
+                name: '购买金额',
+                position: 'left',
+                axisLine: {
+                    lineStyle: {
+                        color: '#d14a61'
+                    }
+                }
+            },
+            {
+                type: 'value',
+                name: '购买量',
+                position: 'right',
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#5793f3'
+                    }
+                }
+            }
+        ],
         series: [{
             name: '购买金额',
             type: 'line',
+            yAxisIndex: 0,
             data: <%=@quantity %>
         },
             {
-                name:'购买量',
+                name: '购买量',
                 type: 'line',
+                yAxisIndex: 1,
                 data:<%=@number %>
-    }]
+            }]
     };
 
     // 使用刚指定的配置项和数据显示图表。
