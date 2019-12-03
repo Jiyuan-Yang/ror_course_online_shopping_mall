@@ -74,6 +74,10 @@ Rails.application.routes.draw do
 
   get '/orders/users/:user_id/graph/category_graph', to: 'orders#category', as: 'category_graph'
 
+  get '/users/:id/user_shop/:shop_id/graph', to: 'shops#graph', as: 'shops_graph'
+
+  post '/users/:id/user_shop/:shop_id/monthly', to: 'shops#monthly', as: 'shops_monthly'
+
 
   resources :users
   resources :shops

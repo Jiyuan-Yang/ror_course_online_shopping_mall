@@ -157,7 +157,7 @@ class OrdersController < ApplicationController
   end
 
   def graph
-
+    @user = User.find(params[:user_id])
   end
 
   def monthly
@@ -235,6 +235,5 @@ class OrdersController < ApplicationController
       return 28
     end
   end
-
 
 end

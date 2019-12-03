@@ -39,5 +39,6 @@
 
   <div class="text-center">
     <%= link_to '<button class="btn btn-success">创建产品</button>'.html_safe, create_product_get_path(shop_id: @shop.id) %>
+    <%= link_to '<button class="btn ">查看店铺报表</button>'.html_safe, shops_graph_path(shop_id: @shop.id) %>
   </div>
 <% end %>
