@@ -1,0 +1,59 @@
+<% provide(:title, '类别统计') %>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:['服装','书籍','办公用品','电子产品','休闲娱乐','植物/动物','虚拟物品']
+    },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:<%=@sum[0] %>, name:'服装'},
+                    {value:<%=@sum[1] %>, name:'书籍'},
+                    {value:<%=@sum[2] %>, name:'办公用品'},
+                    {value:<%=@sum[3] %>, name:'电子产品'},
+                    {value:<%=@sum[4] %>, name:'休闲娱乐'},
+                    {value:<%=@sum[5] %>, name:'植物/动物'},
+                    {value:<%=@sum[6] %>, name:'虚拟物品'}
+                ]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>

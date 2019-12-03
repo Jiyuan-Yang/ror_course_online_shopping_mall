@@ -202,6 +202,22 @@ class OrdersController < ApplicationController
     puts @quantity
   end
 
+  def category
+    categories = Hash["服装" => 0, "书籍" => 1, "办公用品" => 2, "电子产品" => 3, "休闲娱乐" => 4, "植物/动物" => 5, "虚拟物品" => 6]
+    @sum = Array.new
+    (0..6).each do |i|
+      @sum[i] = 0
+    end
+    Order.where(user_id: params[:user_id]).find_each do |order|
+      order.order_items.each do |item|
+        product = item.product
+        if categories.has_key?(product.category)
+          @sum[categories[product.category]] += item.amount
+        end
+      end
+    end
+  end
+
   private
 
   def days_in_month(year, month)

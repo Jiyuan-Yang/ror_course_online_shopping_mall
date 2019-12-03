@@ -72,6 +72,8 @@ Rails.application.routes.draw do
 
   post '/orders/users/:user_id/graph/month_average', to: 'orders#month_average', as: 'month_average_graph'
 
+  get '/orders/users/:user_id/graph/category_graph', to: 'orders#category', as: 'category_graph'
+
 
   resources :users
   resources :shops
