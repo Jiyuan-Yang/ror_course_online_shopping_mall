@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # this is used for sellers to see there shops, for buyer, just use shop id to get shop_path(id)
 
   get '/users/:id/user_shop/:shop_id', to: 'shops#show', as: 'show_shop_get'
-  delete '/users/:id/user_shop/:shop_id', to:'shops#destroy'
+  delete '/users/:id/user_shop/:shop_id', to: 'shops#destroy'
   get '/users/:id/create_shop', to: 'shops#new', as: 'create_shop_get'
   post '/users/:id/create_shop', to: 'shops#create', as: 'create_shop_post'
 
@@ -58,9 +58,9 @@ Rails.application.routes.draw do
   delete '/users/:id/order/order_destroy/:order_id',
          to: 'orders#destroy', as: 'order_destroy'
 
-  get '/category/:category', to:'products#show_one_category', as:'show_one_category'
+  get '/category/:category', to: 'products#show_one_category', as: 'show_one_category'
 
-  delete '/orders/:order_id/:order_item_id', to:'order_items#destroy', as:'order_item_destroy'
+  delete '/orders/:order_id/:order_item_id', to: 'order_items#destroy', as: 'order_item_destroy'
 
   post '/search', to: 'search_results#search', as: 'search_results_display'
 
@@ -68,7 +68,9 @@ Rails.application.routes.draw do
 
   get '/orders/users/:user_id/graph', to: 'orders#graph', as: 'order_graph'
 
-  post '/orders/users/:user_id/graph/monthly', to:'orders#monthly',as: 'monthly_graph'
+  post '/orders/users/:user_id/graph/monthly', to: 'orders#monthly', as: 'monthly_graph'
+
+  post '/orders/users/:user_id/graph/month_average', to: 'orders#month_average', as: 'month_average_graph'
 
 
   resources :users

@@ -177,21 +177,38 @@ class OrdersController < ApplicationController
     end
   end
 
+  def month_average
+    @user = User.find(params[:user_id])
+    year = params[:time].to_s
+    @month = %w(01 02 03 04 05 06 07 08 09 10 11 12)
+    @quantity = []
+    @month.each do |month|
+      sum = 0
+      Order.where("user_id = :uid and order_time >= :s_time and order_time <= :e_time", {uid: @user.id, s_time: year + '-' + month + '-01', e_time: year + '-' + month + '-' + days_in_month(year.to_i, month.to_i).to_s}).find_each do |item|
+        sum += item.total_price
+      end
+      puts sum
+      @quantity.append(sum / days_in_month(year.to_i, month.to_i))
+    end
+    puts @month
+    puts @quantity
+  end
+
   private
 
   def days_in_month(year, month)
     big = [1, 3, 5, 7, 8, 10, 12]
     small = [4, 6, 9, 11]
     if big.include?(month)
-      31
+      return 31
     end
     if small.include?(month)
-      30
+      return 30
     end
     if year % 4 == 0 && year % 100 != 0 || year % 400 == 0
-      29
+      return 29
     else
-      28
+      return 28
     end
   end
 
