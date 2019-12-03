@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
   before_action :logged_in_user, only: [:list_orders, :show, :destroy, :add_one_item_to_order, :add_items_in_shopping_cart_to_order]
   before_action :correct_user, only: [:list_orders, :destroy]
 
+  protect_from_forgery :except => :index
+
   def list_orders
     # @user = current_user
     @user = User.find(params[:id])
@@ -153,4 +155,45 @@ class OrdersController < ApplicationController
     end
     redirect_to(user_shopping_cart_path(current_user.id))
   end
+
+  def graph
+
+  end
+
+  def monthly
+    @user = User.find(params[:user_id])
+    time = params[:time].to_s.split('-')
+    year = time[0]
+    month = time[1]
+    number_of_days = days_in_month(year.to_i, month.to_i)
+    @days = (1..number_of_days).to_a
+    @quantity = []
+    (1..number_of_days).each do |date|
+      sum = 0
+      Order.where(user_id: @user.id, order_time: year + '-' + month + '-' + date.to_s).find_each do |item|
+        sum += item.total_price
+      end
+      @quantity.append(sum)
+    end
+  end
+
+  private
+
+  def days_in_month(year, month)
+    big = [1, 3, 5, 7, 8, 10, 12]
+    small = [4, 6, 9, 11]
+    if big.include?(month)
+      31
+    end
+    if small.include?(month)
+      30
+    end
+    if year % 4 == 0 && year % 100 != 0 || year % 400 == 0
+      29
+    else
+      28
+    end
+  end
+
+
 end

@@ -66,6 +66,11 @@ Rails.application.routes.draw do
 
   get '/orders/:order_id/:order_item_id/update_status', to: 'order_items#update_status', as: 'update_order_status'
 
+  get '/orders/users/:user_id/graph', to: 'orders#graph', as: 'order_graph'
+
+  post '/orders/users/:user_id/graph/monthly', to:'orders#monthly',as: 'monthly_graph'
+
+
   resources :users
   resources :shops
   resources :products

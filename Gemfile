@@ -9,6 +9,10 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bcrypt'
 gem 'nokogiri', '1.8.1'
 gem 'will_paginate', '3.1.7'
+gem 'echarts-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+
 
 gem 'rake', '13.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

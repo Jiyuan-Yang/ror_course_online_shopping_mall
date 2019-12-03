@@ -16,3 +16,6 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap
+//= require echarts.common
+//= require moment
+//= require bootstrap-datetimepicker

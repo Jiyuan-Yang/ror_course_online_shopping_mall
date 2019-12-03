@@ -1,0 +1,41 @@
+<% provide(:title, '报表') %>
+
+<div class="container">
+  <div class="row">
+    <div class='col-md-6'>
+      <form class="form-group" method="post" action=<%=monthly_graph_path(params[:user_id]) %>>
+        <div class='input-group date' id='datetimepicker3'>
+          <input type='text' name="time" class="form-control" />
+          <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">获取月购买量报表</button>
+          </span>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'YYYY-MM'
+            });
+        });
+    </script>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
