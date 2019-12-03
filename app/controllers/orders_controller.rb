@@ -168,11 +168,19 @@ class OrdersController < ApplicationController
     number_of_days = days_in_month(year.to_i, month.to_i)
     @days = (1..number_of_days).to_a
     @quantity = []
+    @number = []
     (1..number_of_days).each do |date|
       sum = 0
+      number_day = 0
       Order.where(user_id: @user.id, order_time: year + '-' + month + '-' + date.to_s).find_each do |item|
+        number_order = 0
         sum += item.total_price
+        item.order_items.find_each do |order_item|
+          number_order += order_item.amount
+        end
+        number_day += number_order
       end
+      @number.append(number_day)
       @quantity.append(sum)
     end
   end

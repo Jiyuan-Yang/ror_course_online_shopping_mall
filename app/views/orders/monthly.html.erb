@@ -13,17 +13,22 @@
         },
         tooltip: {},
         legend: {
-            data: ['购买量']
+            data: ['购买金额','购买量']
         },
         xAxis: {
             data: <%=@days %>
         },
         yAxis: {},
         series: [{
-            name: '购买量',
+            name: '购买金额',
             type: 'line',
             data: <%=@quantity %>
-        }]
+        },
+            {
+                name:'购买量',
+                type: 'line',
+                data:<%=@number %>
+    }]
     };
 
     // 使用刚指定的配置项和数据显示图表。
