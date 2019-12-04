@@ -15,7 +15,7 @@
       <%= f.text_field :price, class: 'form-control' %>
 
       <%= f.label :种类 %>
-      <%= f.text_field :category, class: 'form-control' %>
+      <%= f.select :category, Product::CATEGORY.invert %>
       <!-- the data base will transfer it, just pass it as string, and use regexp to check -->
 
       <%= f.submit "创建商品", class: "btn btn-primary" %>
