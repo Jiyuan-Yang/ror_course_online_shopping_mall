@@ -6,6 +6,7 @@
   <td class="col-md-4">
     <%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe,
                 product_path(product.id) %>
+    <!--
     <%= link_to '<button class="btn btn-danger">删除该商品</button>'.html_safe, product_path(product.id),
                 method: :delete, data: {confirm: '您确定要删除吗?'} %>
     <%= link_to '<button class="btn ">编辑商品信息</button>'.html_safe,
@@ -28,5 +29,6 @@
             });
         });
     </script>
+    -->
   </td>
 </tr>
