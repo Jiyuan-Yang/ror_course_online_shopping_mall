@@ -11,6 +11,8 @@ class User < ApplicationRecord
   CHARACTERS = %w(buyer seller administrator)
   validates_inclusion_of :character, :in => CHARACTERS
 
+  CHARACTERS_DOWN_LIST = {'买家':'buyer', '卖家':'seller', '管理员':'administrator'}
+
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 

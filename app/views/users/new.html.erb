@@ -10,15 +10,20 @@
 
       <%= f.label :email, "电子邮件" %>
       <%= f.email_field :email, class: 'form-control' %>
-
+      <!--
       <%= f.label :character, "用户类别"%>
       <%= f.text_field :character, class: 'form-control' %>
+      -->
+
       <!--
       <%= select_tag(:city_id, options_for_select(
       [['buyer: could go shopping on this web mall', 'buyer'],
        ['seller: could open your own shops', 'seller'],
        ['administrator: have the right to manage every thing', 'administrator']], 1)) %>
       -->
+
+      <%= f.label :character, "用户类别"%>
+      <%= f.select :character, User::CHARACTERS_DOWN_LIST %>
 
       <%= f.label :password, "密码" %>
       <%= f.password_field :password, class: 'form-control' %>
