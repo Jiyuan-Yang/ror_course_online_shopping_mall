@@ -104,8 +104,30 @@
     </div>
   </div>
   <%= link_to "类别报表", category_graph_path(params[:user_id]) %>
-  <br>
-  <%= link_to "您的商品销量排行", product_sales_ranking_path(params[:user_id]) %>
+  <div class="container">
+    <div class="row">
+      <div class='col-md-6'>
+        <form class="form-group" method="post" action=<%= product_sales_ranking_path(params[:user_id]) %>>
+          <div class='input-group date' id='datetimepicker7'>
+            <input type='text' name="time" class="form-control"/>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">获取该月您的商品销售排行</button>
+          </span>
+          </div>
+        </form>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker7').datetimepicker({
+                  format: 'YYYY-MM'
+              });
+          });
+      </script>
+    </div>
+  </div>
 <% end %>
 
 

@@ -84,7 +84,7 @@ Rails.application.routes.draw do
 
   post 'products/:product_id/monthly', to: 'products#monthly', as: 'product_monthly_graph'
 
-  get 'users/:user_id/product_sales_ranking', to: 'products#sales_ranking', as: 'product_sales_ranking'
+  post 'users/:user_id/product_sales_ranking', to: 'products#sales_ranking', as: 'product_sales_ranking'
 
 
   resources :users

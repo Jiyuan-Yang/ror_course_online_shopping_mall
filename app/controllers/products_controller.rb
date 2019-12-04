@@ -53,15 +53,21 @@ class ProductsController < ApplicationController
   end
 
   def sales_ranking
+    time = params[:time].to_s.split('-')
+    year = time[0]
+    month = time[1]
     @user = User.find(params[:user_id])
     @amount = Hash.new
     @user.shops.each do |shop|
       shop.products.each do |product|
         product.order_items.each do |order_item|
-          if @amount.has_key?(order_item.product_id)
-            @amount[order_item.product_id] += order_item.amount
-          else
-            @amount[order_item.product_id] = order_item.amount
+          order_time = order_item.created_at.to_date
+          if year == order_time.year.to_s and month == order_time.month.to_s
+            if @amount.has_key?(order_item.product_id)
+              @amount[order_item.product_id] += order_item.amount
+            else
+              @amount[order_item.product_id] = order_item.amount
+            end
           end
         end
       end

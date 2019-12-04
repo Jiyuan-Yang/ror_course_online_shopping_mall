@@ -1,2 +1,48 @@
 <% provide(:title, '您的商品销量排行') %>
 
+<%if @amount.any? %>
+<div class="container-fluid">
+  <table class="table table-striped">
+    <tr>
+      <th class="col-md-1">月销量</th>
+      <th class="col-md-1">产品ID</th>
+      <th class="col-md-2">产品名称</th>
+      <th class="col-md-2">产品描述</th>
+      <th class="col-md-2">价格</th>
+      <th class="col-md-4">操作</th>
+    </tr>
+    <%@amount.each do |item| %>
+      <%product = Product.find(item[0]) %>
+      <tr>
+        <td class="col-md-1"><%= item[1] %> </td>
+        <td class="col-md-1"><%= product.id %> </td>
+        <td class="col-md-2"><%= product.name %></td>
+        <td class="col-md-2"><%= product.description %> </td>
+        <td class="col-md-2"><%= product.price %> </td>
+        <td class="col-md-4">
+          <%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe,
+                      product_path(product.id) %>
+          <form class="form-group" method="post" action=<%= product_monthly_graph_path(product.id) %>>
+            <div class='input-group date' id='datetimepicker<%= product.id %>'>
+              <input type='text' name="time" class="form-control"/>
+              <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+              <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">获取月销售量报表</button>
+          </span>
+            </div>
+          </form>
+          <script type="text/javascript">
+              $(function () {
+                  $('#datetimepicker<%= product.id %>').datetimepicker({
+                      format: 'YYYY-MM'
+                  });
+              });
+          </script>
+        </td>
+      </tr>
+    <%end %>
+  </table>
+</div>
+<%end %>
