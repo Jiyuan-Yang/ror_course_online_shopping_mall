@@ -24,6 +24,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @item = Product.find(params[:id])
+    @item.destroy
+    shop_id = @item.shop.id
+    flash[:success] = '成功删除商品！'
+    redirect_to show_shop_get_path(params[:id], shop_id)
+  end
+
   def show_one_category
     @products = Product.where("category=?", params[:category]).paginate(:page => params[:page], :per_page => 6)
   end
