@@ -5,17 +5,17 @@
     <%= form_for(@product, url: create_product_post_path, method: :post) do |f| %>
       <%= render 'shared/error_messages', item: @product %>
 
-      <%= f.label :商品名 %>
+      <%= f.label :name, '商品名' %>
       <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :描述 %>
+      <%= f.label :description, '描述' %>
       <%= f.text_area :description, class: 'form-control' %>
 
-      <%= f.label :价格 %>
+      <%= f.label :price, '价格' %>
       <%= f.text_field :price, class: 'form-control' %>
 
-      <%= f.label :种类 %>
-      <%= f.select :category, Product::CATEGORY.invert %>
+      <%= f.label :category, '种类' %>
+      <%= f.select :category, Product::CATEGORY %>
       <!-- the data base will transfer it, just pass it as string, and use regexp to check -->
 
       <%= f.submit "创建商品", class: "btn btn-primary" %>

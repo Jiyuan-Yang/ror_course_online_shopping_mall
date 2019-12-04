@@ -1,5 +1,9 @@
-<% provide(:title, params[:category]) %>
-<h1><%= params[:category] %></h1>
+<% params_map = {'clothes':'服装','books':'书籍','office':'办公用品',
+                 'digital':'电子产品','entertainment':'休闲娱乐',
+                 'fruits_and_animals':'植物/动物', 'virtual_items':'虚拟商品'} %>
+<% provide(:title, params_map[params[:category].to_sym]) %>
+<!-- don't forget to use to_sym, or it will use string -->
+<h1><%= params_map[params[:category].to_sym] %></h1>
 <div>
   <% if @products.any? %>
     <div class="container-fluid">
