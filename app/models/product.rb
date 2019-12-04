@@ -11,9 +11,9 @@ class Product < ApplicationRecord
   CATEGORY = {'clothes'=>'服装','books'=>'书籍','office'=>'办公用品','digital'=>'电子产品','entertainment'=>'休闲娱乐','fruits_and_animals'=>'植物/动物','virtual_items' =>'虚拟商品'}
 
   belongs_to :shop
-  has_many :shopping_cart_items
-  has_many :favorite_items
-  has_many :order_items
+  has_many :shopping_cart_items, dependent: :delete_all
+  has_many :favorite_items, dependent: :delete_all
+  has_many :order_items, dependent: :delete_all
 
   private
   def local_unique_validation

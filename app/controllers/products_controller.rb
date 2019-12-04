@@ -52,6 +52,25 @@ class ProductsController < ApplicationController
     print @total_price
   end
 
+  def sales_ranking
+    @user = User.find(params[:user_id])
+    @amount = Hash.new
+    @user.shops.each do |shop|
+      shop.products.each do |product|
+        product.order_items.each do |order_item|
+          if @amount.has_key?(order_item.product_id)
+            @amount[order_item.product_id] += order_item.amount
+          else
+            @amount[order_item.product_id] = order_item.amount
+          end
+        end
+      end
+    end
+    print @amount
+    @amount = @amount.sort { |a, b| a[1] <=> b[1] }
+    print @amount
+  end
+
   private
 
   def product_params
