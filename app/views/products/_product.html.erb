@@ -8,6 +8,8 @@
                 product_path(product.id) %>
     <%= link_to '<button class="btn btn-danger">删除该商品</button>'.html_safe, product_path(product.id),
                 method: :delete, data: {confirm: '您确定要删除吗?'} %>
+    <%= link_to '<button class="btn ">编辑商品信息</button>'.html_safe,
+                edit_product_path(product.id) %>
     <form class="form-group" method="post" action=<%= product_monthly_graph_path(product.id) %>>
       <div class='input-group date' id='datetimepicker<%= product.id %>'>
         <input type='text' name="time" class="form-control"/>

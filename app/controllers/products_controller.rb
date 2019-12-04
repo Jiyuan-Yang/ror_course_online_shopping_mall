@@ -32,6 +32,20 @@ class ProductsController < ApplicationController
     redirect_to show_shop_get_path(params[:id], shop_id)
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update_attributes(product_params)
+      flash[:success] = "成功修改!"
+      redirect_to @product
+    else
+      redirect_to edit_product_path(@product.id)
+    end
+  end
+
   def show_one_category
     @products = Product.where("category=?", params[:category]).paginate(:page => params[:page], :per_page => 6)
   end
