@@ -54,7 +54,55 @@
 <% end %>
 
 <% if @user.character == 'seller' %>
+  <div class="container">
+    <div class="row">
+      <div class='col-md-6'>
+        <form class="form-group" method="post" action=<%= month_income_graph_path(params[:user_id]) %>>
+          <div class='input-group date' id='datetimepicker5'>
+            <input type='text' name="time" class="form-control"/>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">获取该月收入曲线</button>
+          </span>
+          </div>
+        </form>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker5').datetimepicker({
+                  format: 'YYYY-MM'
+              });
+          });
+      </script>
+    </div>
+  </div>
 
+  <div class="container">
+    <div class="row">
+      <div class='col-md-6'>
+        <form class="form-group" method="post" action=<%= year_income_graph_path(params[:user_id]) %>>
+          <div class='input-group date' id='datetimepicker6'>
+            <input type='text' name="time" class="form-control"/>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">获取该年收入曲线</button>
+          </span>
+          </div>
+        </form>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker6').datetimepicker({
+                  format: 'YYYY'
+              });
+          });
+      </script>
+    </div>
+  </div>
 <% end %>
 
 

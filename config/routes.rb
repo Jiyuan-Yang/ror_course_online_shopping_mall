@@ -78,6 +78,13 @@ Rails.application.routes.draw do
 
   post '/users/:id/user_shop/:shop_id/monthly', to: 'shops#monthly', as: 'shops_monthly'
 
+  post '/orders/users/:user_id/graph/month_income', to: 'orders#month_income', as: 'month_income_graph'
+
+  post '/orders/users/:user_id/graph/year_income', to: 'orders#year_income', as: 'year_income_graph'
+
+
+
+
 
   resources :users
   resources :shops

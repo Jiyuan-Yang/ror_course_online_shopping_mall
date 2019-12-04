@@ -218,6 +218,36 @@ class OrdersController < ApplicationController
     end
   end
 
+  def month_income
+    @user = User.find(params[:user_id])
+    time = params[:time].to_s.split('-')
+    year = time[0]
+    month = time[1]
+    number_of_days = days_in_month(year.to_i, month.to_i)
+    @days = (1..number_of_days).to_a
+    @income = Array.new(number_of_days, 0)
+    Order.where(user_id: @user.id).find_each do |order|
+      order_time = order.order_time
+      if year == order_time.year.to_s and month == order_time.month.to_s
+        @income[order_time.day - 1] += order.total_price
+      end
+    end
+    print @income
+  end
+
+  def year_income
+    @user = User.find(params[:user_id])
+    year = params[:time].to_s
+    @income = Array.new(12, 0)
+    Order.where(user_id: @user.id).find_each do |order|
+      order_time = order.order_time
+      if year == order_time.year.to_s
+        @income[order_time.month - 1] += order.total_price
+      end
+    end
+    print @income
+  end
+
   private
 
   def days_in_month(year, month)
