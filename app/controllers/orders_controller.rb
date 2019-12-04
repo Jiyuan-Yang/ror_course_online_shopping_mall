@@ -196,8 +196,13 @@ class OrdersController < ApplicationController
         sum += item.total_price
       end
       puts sum
-      @quantity.append(sum / days_in_month(year.to_i, month.to_i))
+      @quantity.append(sum)
     end
+    sum = 0
+    (0..11).each do |i|
+      sum += @quantity[i]
+    end
+    @avg = sum / 12
     puts @month
     puts @quantity
   end
@@ -246,6 +251,11 @@ class OrdersController < ApplicationController
       end
     end
     print @income
+    sum = 0
+    (0..11).each do |i|
+      sum += @income[i]
+    end
+    @avg = sum / 12
   end
 
   private
