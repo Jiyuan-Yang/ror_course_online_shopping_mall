@@ -208,7 +208,7 @@ class OrdersController < ApplicationController
   end
 
   def category
-    categories = Hash["服装" => 0, "书籍" => 1, "办公用品" => 2, "电子产品" => 3, "休闲娱乐" => 4, "植物/动物" => 5, "虚拟商品" => 6]
+    categories = Hash["clothes" => 0, "books" => 1, "office" => 2, "digital" => 3, "entertainment" => 4, "fruits_and_animals" => 5, "virtual_items" => 6]
     @sum = Array.new
     (0..6).each do |i|
       @sum[i] = 0
