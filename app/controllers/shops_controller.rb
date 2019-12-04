@@ -64,8 +64,8 @@ class ShopsController < ApplicationController
       product.order_items.each do |shopping_item|
         order_time = shopping_item.created_at.to_date
         if year == order_time.year.to_s and month == order_time.month.to_s
-          @amount[order_time.day] += shopping_item.amount
-          @total_price[order_time.day] += shopping_item.total_price
+          @amount[(order_time.day) - 1] += shopping_item.amount
+          @total_price[(order_time.day) - 1] += shopping_item.total_price
         end
       end
     end

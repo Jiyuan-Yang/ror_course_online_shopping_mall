@@ -229,7 +229,7 @@ class OrdersController < ApplicationController
     Order.where(user_id: @user.id).find_each do |order|
       order_time = order.order_time
       if year == order_time.year.to_s and month == order_time.month.to_s
-        @income[order_time.day - 1] += order.total_price
+        @income[(order_time.day) - 1] += order.total_price
       end
     end
     print @income
@@ -242,7 +242,7 @@ class OrdersController < ApplicationController
     Order.where(user_id: @user.id).find_each do |order|
       order_time = order.order_time
       if year == order_time.year.to_s
-        @income[order_time.month - 1] += order.total_price
+        @income[(order_time.month) - 1] += order.total_price
       end
     end
     print @income
