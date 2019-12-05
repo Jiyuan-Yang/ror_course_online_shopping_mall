@@ -93,8 +93,8 @@ class ShopsController < ApplicationController
       @amount[i] = @amount[i] / 2
       @total_price[i] = @total_price[i] / 2
     end
-    print @amount
-    print @total_price
+    #print @amount
+    #print @total_price
   end
 
   private
