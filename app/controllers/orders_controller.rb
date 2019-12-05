@@ -2,8 +2,9 @@ class OrdersController < ApplicationController
   before_action :logged_in_user, only: [:list_orders, :show, :destroy,
                                         :add_one_item_to_order,
                                         :add_items_in_shopping_cart_to_order,
-                                        :month_income, :year_income]
-  before_action :correct_user, only: [:list_orders, :destroy, :month_income, :year_income]
+                                        :month_income, :year_income, :monthly, :month_average]
+  before_action :correct_user, only: [:list_orders, :destroy, :month_income, :year_income,
+                                      :monthly, :month_average]
 
   protect_from_forgery :except => :index
 
@@ -161,10 +162,12 @@ class OrdersController < ApplicationController
 
   def graph
     @user = User.find(params[:user_id])
+    # print 'debug>>>>>>>>>', current_user, @user, current_user == @user
   end
 
   def monthly
     @user = User.find(params[:user_id])
+    # print 'debug>>>>>>curuser', current_user.name
     time = params[:time].to_s.split('-')
     year = time[0]
     month = time[1]
