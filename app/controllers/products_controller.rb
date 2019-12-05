@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
 
   protect_from_forgery :except => :index
 
+  @@pre_time_monthly = nil
+  @@pre_time_sales_ranking = nil
 
   def new
     @product = Product.new
@@ -53,7 +55,20 @@ class ProductsController < ApplicationController
 
   def monthly
     @product = Product.find(params[:product_id])
-    time = params[:time].to_s.split('-')
+    if params[:time].blank?
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_monthly.nil?
+          redirect_to(order_graph_path)
+        end
+        time = @@pre_time_monthly.to_s.split('-')
+      end
+    else
+      time = params[:time].to_s.split('-')
+      @@pre_time_monthly = params[:time]
+    end
     year = time[0]
     month = time[1]
     number_of_days = days_in_month(year.to_i, month.to_i)
@@ -76,7 +91,20 @@ class ProductsController < ApplicationController
   end
 
   def sales_ranking
-    time = params[:time].to_s.split('-')
+    if params[:time].blank?
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_sales_ranking.nil?
+          redirect_to(order_graph_path)
+        end
+        time = @@pre_time_sales_ranking.to_s.split('-')
+      end
+    else
+      time = params[:time].to_s.split('-')
+      @@pre_time_sales_ranking = params[:time]
+    end
     year = time[0]
     month = time[1]
     @user = User.find(params[:user_id])

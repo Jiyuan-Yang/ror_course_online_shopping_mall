@@ -8,6 +8,11 @@ class OrdersController < ApplicationController
 
   protect_from_forgery :except => :index
 
+  @@pre_time_monthly = nil
+  @@pre_time_month_average = nil
+  @@pre_time_month_income = nil
+  @@pre_time_year_income = nil
+
   def list_orders
     # @user = current_user
     @user = User.find(params[:id])
@@ -169,10 +174,19 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     # print 'debug>>>>>>curuser', current_user.name
     if params[:time].blank?
-      redirect_to(order_graph_path)
-      return
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_monthly.nil?
+          redirect_to(order_graph_path)
+        end
+        time = @@pre_time_monthly.to_s.split('-')
+      end
+    else
+      time = params[:time].to_s.split('-')
+      @@pre_time_monthly = params[:time]
     end
-    time = params[:time].to_s.split('-')
     year = time[0]
     month = time[1]
     number_of_days = days_in_month(year.to_i, month.to_i)
@@ -198,10 +212,19 @@ class OrdersController < ApplicationController
   def month_average
     @user = User.find(params[:user_id])
     if params[:time].blank?
-      redirect_to(order_graph_path)
-      return
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_month_average.nil?
+          redirect_to(order_graph_path)
+        end
+        year = @@pre_time_month_average.to_s
+      end
+    else
+      year = params[:time].to_s
+      @@pre_time_month_average = params[:time]
     end
-    year = params[:time].to_s
     @month = %w(01 02 03 04 05 06 07 08 09 10 11 12)
     @quantity = []
     @month.each do |month|
@@ -240,10 +263,19 @@ class OrdersController < ApplicationController
   def month_income
     @user = User.find(params[:user_id])
     if params[:time].blank?
-      redirect_to(order_graph_path)
-      return
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_month_income.nil?
+          redirect_to(order_graph_path)
+        end
+        time = @@pre_time_month_income.to_s.split('-')
+      end
+    else
+      time = params[:time].to_s.split('-')
+      @@pre_time_month_income = params[:time]
     end
-    time = params[:time].to_s.split('-')
     year = time[0]
     month = time[1]
     number_of_days = days_in_month(year.to_i, month.to_i)
@@ -261,10 +293,19 @@ class OrdersController < ApplicationController
   def year_income
     @user = User.find(params[:user_id])
     if params[:time].blank?
-      redirect_to(order_graph_path)
-      return
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_year_income.nil?
+          redirect_to(order_graph_path)
+        end
+        year = @@pre_time_year_income.to_s
+      end
+    else
+      year = params[:time].to_s
+      @@pre_time_year_income = params[:time]
     end
-    year = params[:time].to_s
     @income = Array.new(12, 0)
     Order.where(user_id: @user.id).find_each do |order|
       order_time = order.order_time

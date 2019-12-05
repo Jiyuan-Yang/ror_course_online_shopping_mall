@@ -4,6 +4,8 @@ class ShopsController < ApplicationController
 
   protect_from_forgery :except => :index
 
+  @@pre_time_monthly = nil
+
   def new
     @shop = Shop.new
   end
@@ -53,7 +55,20 @@ class ShopsController < ApplicationController
   def monthly
     @shop = Shop.find(params[:shop_id])
     @user = User.find(params[:id])
-    time = params[:time].to_s.split('-')
+    if params[:time].blank?
+      if params.keys.count == 4
+        redirect_to(order_graph_path)
+        return
+      else
+        if @@pre_time_monthly.nil?
+          redirect_to(order_graph_path)
+        end
+        time = @@pre_time_monthly.to_s.split('-')
+      end
+    else
+      time = params[:time].to_s.split('-')
+      @@pre_time_monthly = params[:time]
+    end
     year = time[0]
     month = time[1]
     number_of_days = days_in_month(year.to_i, month.to_i)

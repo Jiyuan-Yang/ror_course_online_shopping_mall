@@ -80,7 +80,8 @@ Rails.application.routes.draw do
   delete '/orders/:order_id/:order_item_id', to: 'order_items#destroy', as: 'order_item_destroy'
 
   # deal with invalid get access
-  get '/search', to: 'static_pages#invalid_get_handler'
+  # get '/search', to: 'static_pages#invalid_get_handler'
+  get '/search', to: 'search_results#search'
   post '/search', to: 'search_results#search', as: 'search_results_display'
 
   get '/orders/:order_id/:order_item_id/update_status', to: 'order_items#update_status', as: 'update_order_status'
@@ -88,11 +89,13 @@ Rails.application.routes.draw do
   get '/orders/users/:user_id/graph', to: 'orders#graph', as: 'order_graph'
 
   # deal with invalid get access
-  get '/orders/users/:user_id/graph/monthly', to: 'static_pages#invalid_get_handler'
+  # get '/orders/users/:user_id/graph/monthly', to: 'static_pages#invalid_get_handler'
+  get '/orders/users/:user_id/graph/monthly', to: 'orders#monthly'
   post '/orders/users/:user_id/graph/monthly', to: 'orders#monthly', as: 'monthly_graph'
 
   # deal with invalid get access
-  get '/orders/users/:user_id/graph/month_average', to: 'static_pages#invalid_get_handler'
+  # get '/orders/users/:user_id/graph/month_average', to: 'static_pages#invalid_get_handler'
+  get '/orders/users/:user_id/graph/month_average', to: 'orders#month_average'
   post '/orders/users/:user_id/graph/month_average', to: 'orders#month_average', as: 'month_average_graph'
 
   get '/orders/users/:user_id/graph/category_graph', to: 'orders#category', as: 'category_graph'
@@ -101,22 +104,27 @@ Rails.application.routes.draw do
 
   # deal with invalid get access
   get '/users/:id/user_shop/:shop_id/monthly', to: 'static_pages#invalid_get_handler'
+  # get '/users/:id/user_shop/:shop_id/monthly', to: 'shops#monthly'
   post '/users/:id/user_shop/:shop_id/monthly', to: 'shops#monthly', as: 'shops_monthly'
 
   # deal with invalid get access
-  get '/orders/users/:user_id/graph/month_income', to: 'static_pages#invalid_get_handler'
+  # get '/orders/users/:user_id/graph/month_income', to: 'static_pages#invalid_get_handler'
+  get '/orders/users/:user_id/graph/month_income', to: 'orders#month_income'
   post '/orders/users/:user_id/graph/month_income', to: 'orders#month_income', as: 'month_income_graph'
 
   # deal with invalid get access
-  get '/orders/users/:user_id/graph/year_income', to: 'static_pages#invalid_get_handler'
+  # get '/orders/users/:user_id/graph/year_income', to: 'static_pages#invalid_get_handler'
+  get '/orders/users/:user_id/graph/year_income', to: 'orders#year_income'
   post '/orders/users/:user_id/graph/year_income', to: 'orders#year_income', as: 'year_income_graph'
 
   # deal with invalid get access
-  get '/products/:product_id/monthly', to: 'static_pages#invalid_get_handler'
+  # get '/products/:product_id/monthly', to: 'static_pages#invalid_get_handler'
+  get '/products/:product_id/monthly', to: 'products#monthly'
   post '/products/:product_id/monthly', to: 'products#monthly', as: 'product_monthly_graph'
 
   # deal with invalid get access
-  get '/users/:user_id/product_sales_ranking', to: 'static_pages#invalid_get_handler'
+  # get '/users/:user_id/product_sales_ranking', to: 'static_pages#invalid_get_handler'
+  get '/users/:user_id/product_sales_ranking', to: 'products#sales_ranking'
   post '/users/:user_id/product_sales_ranking', to: 'products#sales_ranking', as: 'product_sales_ranking'
 
   resources :users
