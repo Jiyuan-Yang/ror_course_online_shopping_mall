@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :monthly, :sales_ranking]
-  before_action :correct_user_seller, only: [:new, :create, :sales_ranking]
+  before_action :logged_in_user, only: [:new, :create, :monthly, :sales_ranking, :destroy]
+  before_action :correct_user_seller, only: [:new, :create, :sales_ranking, :destroy]
   before_action :product_current_user?, only: [:monthly]
 
   protect_from_forgery :except => :index
@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
     @item.destroy
     shop_id = @item.shop.id
     flash[:success] = '成功删除商品！'
-    redirect_to show_shop_get_path(params[:id], shop_id)
+    redirect_to show_shop_get_path(current_user.id, shop_id)
   end
 
   def edit
