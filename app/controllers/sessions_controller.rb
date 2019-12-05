@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  # deal with unexpected when log out in charts
+  skip_before_action :verify_authenticity_token
+
   def new
 
   end

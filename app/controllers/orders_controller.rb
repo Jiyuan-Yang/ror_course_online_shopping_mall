@@ -168,6 +168,10 @@ class OrdersController < ApplicationController
   def monthly
     @user = User.find(params[:user_id])
     # print 'debug>>>>>>curuser', current_user.name
+    if params[:time].blank?
+      redirect_to(order_graph_path)
+      return
+    end
     time = params[:time].to_s.split('-')
     year = time[0]
     month = time[1]
@@ -193,6 +197,10 @@ class OrdersController < ApplicationController
 
   def month_average
     @user = User.find(params[:user_id])
+    if params[:time].blank?
+      redirect_to(order_graph_path)
+      return
+    end
     year = params[:time].to_s
     @month = %w(01 02 03 04 05 06 07 08 09 10 11 12)
     @quantity = []
@@ -231,6 +239,10 @@ class OrdersController < ApplicationController
 
   def month_income
     @user = User.find(params[:user_id])
+    if params[:time].blank?
+      redirect_to(order_graph_path)
+      return
+    end
     time = params[:time].to_s.split('-')
     year = time[0]
     month = time[1]
@@ -248,6 +260,10 @@ class OrdersController < ApplicationController
 
   def year_income
     @user = User.find(params[:user_id])
+    if params[:time].blank?
+      redirect_to(order_graph_path)
+      return
+    end
     year = params[:time].to_s
     @income = Array.new(12, 0)
     Order.where(user_id: @user.id).find_each do |order|

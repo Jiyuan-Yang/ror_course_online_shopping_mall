@@ -119,6 +119,8 @@ Rails.application.routes.draw do
   get '/users/:user_id/product_sales_ranking', to: 'static_pages#invalid_get_handler'
   post '/users/:user_id/product_sales_ranking', to: 'products#sales_ranking', as: 'product_sales_ranking'
 
+  # deal with invalid get access
+  get '*a', to: 'static_pages#invalid_get_handler'
 
   resources :users
   resources :shops
