@@ -182,7 +182,7 @@ class OrdersController < ApplicationController
 
   def graph
     @user = User.find(params[:user_id])
-    # print 'debug>>>>>>>>>', current_user, @user, current_user == @user
+    #  'debug>>>>>>>>>', current_user, @user, current_user == @user
   end
 
   def monthly
@@ -247,7 +247,7 @@ class OrdersController < ApplicationController
       Order.where("user_id = :uid and order_time >= :s_time and order_time <= :e_time", {uid: @user.id, s_time: year + '-' + month + '-01', e_time: year + '-' + month + '-' + days_in_month(year.to_i, month.to_i).to_s}).find_each do |item|
         sum += item.total_price
       end
-      puts sum
+      #puts sum
       @quantity.append(sum)
     end
     sum = 0
@@ -255,8 +255,8 @@ class OrdersController < ApplicationController
       sum += @quantity[i]
     end
     @avg = sum / 12
-    puts @month
-    puts @quantity
+    #puts @month
+    #puts @quantity
   end
 
   def category
@@ -302,7 +302,7 @@ class OrdersController < ApplicationController
         @income[(order_time.day) - 1] += order.total_price
       end
     end
-    print @income
+      #print @income
   end
 
   def year_income
@@ -328,7 +328,7 @@ class OrdersController < ApplicationController
         @income[(order_time.month) - 1] += order.total_price
       end
     end
-    print @income
+    #print @income
     sum = 0
     (0..11).each do |i|
       sum += @income[i]

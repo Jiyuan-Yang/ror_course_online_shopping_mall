@@ -86,8 +86,8 @@ class ProductsController < ApplicationController
       @amount[i] = @amount[i] / 2
       @total_price[i] = @total_price[i] / 2
     end
-    print @amount
-    print @total_price
+    #print @amount
+    #print @total_price
   end
 
   def sales_ranking
@@ -123,9 +123,9 @@ class ProductsController < ApplicationController
         end
       end
     end
-    print @amount
+    #print @amount
     @amount = @amount.sort { |a, b| a[1] <=> b[1] }
-    print @amount
+      #print @amount
   end
 
   private
