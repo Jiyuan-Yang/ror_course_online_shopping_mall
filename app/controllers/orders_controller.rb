@@ -48,10 +48,16 @@ class OrdersController < ApplicationController
       @item = Order.find(params[:order_id])
     end
     order_id = @item.id
+    is_buyer_order = false
+    if @item.link_order_id.nil?
+      is_buyer_order = true
+    end
     @item.destroy
-    Order.all.each do |item|
-      if item.link_order_id == order_id
-        item.destroy
+    if is_buyer_order
+      Order.all.each do |item|
+        if item.link_order_id == order_id
+          item.destroy
+        end
       end
     end
     flash[:success] = "Order id #{order_id} deleted!"
@@ -60,6 +66,7 @@ class OrdersController < ApplicationController
     else
       redirect_to('/all_orders')
     end
+
   end
 
   def add_one_item_to_order
@@ -101,7 +108,6 @@ class OrdersController < ApplicationController
                               total_price: @product.price)
       @second.save
       @first.update(:corresponding_id => @second.id)
-      @order_buyer.update(:link_order_id => @order_seller.id)
       flash[:success] = "您已购买该商品！"
     end
     redirect_to(@product)
