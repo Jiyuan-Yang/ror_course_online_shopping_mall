@@ -16,7 +16,6 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
-  validates :receiver_name, presence: true
   VALID_RECEIVER_PHONE_REGEX = /\A(\d{11})?\z/i
   validates :receiver_phone_number, format: {with: VALID_RECEIVER_PHONE_REGEX, message: '手机号应该包含11位数字'}
 
