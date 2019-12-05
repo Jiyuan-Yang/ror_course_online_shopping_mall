@@ -1,4 +1,26 @@
-<% Shop.all.each do |item| %>
-  <div><%= item.id %>|<%= item.name %>|<%= item.user.name %>|
-    <%= link_to 'delete', show_shop_get_path(id: item.user.id, shop_id: item.id), method: :delete, data: {confirm: 'Are you sure?'} %></div>
-<% end %>
+<% provide(:title, '全部店铺') %>
+<div class="container-fluid">
+  <table class="table table-striped">
+    <tr>
+      <th class="col-md-2">店铺ID</th>
+      <th class="col-md-2">店铺名称</th>
+      <th class="col-md-4">店铺描述</th>
+      <th class="col-md-2">店主</th>
+      <th class="col-md-2">操作</th>
+    </tr>
+    <% Shop.all.each do |item| %>
+    <tr>
+      <td class="col-md-2"> <%= item.id %> </td>
+      <td class="col-md-2"> <%= item.name %> </td>
+      <td class="col-md-4"> <%= item.description %> </td>
+      <td class="col-md-2"> <%= item.user.name %> </td>
+      <td class="col-md-2">
+        <%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe,
+                    item %>
+        <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe,
+                    item, method: :delete, data: {confirm: '您确定要删除此店铺吗?'} %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

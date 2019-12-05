@@ -3,7 +3,7 @@
     <%= link_to "the Max Jim's", root_path, id: "logo" %>
     <nav>
       <form class="navbar-form navbar-right search_bar" role="search"
-        action="/search" method="post">
+            action="/search" method="post">
         <div class="form-group">
           <input type="text" name="keyword" class="form-control" placeholder="输入关键词...">
         </div>
@@ -58,7 +58,9 @@
               <% end %>
               <li><%= link_to "个人信息", current_user %></li>
               <li><%= link_to "设置", edit_user_path(current_user) %></li>
-              <li><%= link_to "报表", order_graph_path(current_user) %></li>
+              <% if current_user.character != "administrator" %>
+                <li><%= link_to "报表", order_graph_path(current_user) %></li>
+              <% end %>
               <li class="divider"></li>
               <li>
                 <%= link_to "注销", logout_path, method: :delete %>

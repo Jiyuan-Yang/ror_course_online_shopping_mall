@@ -42,7 +42,11 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @item = Order.find(params[:order_id])
+    if params[:order_id].blank?
+      @item = Order.find(params[:id])
+    else
+      @item = Order.find(params[:order_id])
+    end
     order_id = @item.id
     @item.destroy
     Order.all.each do |item|
@@ -51,7 +55,11 @@ class OrdersController < ApplicationController
       end
     end
     flash[:success] = "Order id #{order_id} deleted!"
-    redirect_to(list_orders_path(id: params[:id]))
+    if current_user.character != 'administrator'
+      redirect_to(list_orders_path(id: params[:id]))
+    else
+      redirect_to('/all_orders')
+    end
   end
 
   def add_one_item_to_order
@@ -60,16 +68,16 @@ class OrdersController < ApplicationController
     @seller = User.find(@shop.user_id)
     lack_info = []
     if current_user.receiver_name.blank?
-      lack_info.append('receiver_name')
+      lack_info.append('收货人姓名')
     end
     if current_user.receiver_address.blank?
-      lack_info.append('receiver_name')
+      lack_info.append('收货人地址')
     end
     if current_user.receiver_name.blank?
-      lack_info.append('receiver_phone_number')
+      lack_info.append('收货人联系电话')
     end
     if lack_info != []
-      flash[:danger] = "Please add your " + lack_info.inject { |all_info, info| all_info + ', ' + info }
+      flash[:danger] = "请完善您的 " + lack_info.inject { |all_info, info| all_info + ', ' + info }
     else
       @order_buyer = Order.new(receiver_name: current_user.receiver_name,
                                receiver_address: current_user.receiver_address,
@@ -93,6 +101,7 @@ class OrdersController < ApplicationController
                               total_price: @product.price)
       @second.save
       @first.update(:corresponding_id => @second.id)
+      @order_buyer.update(:link_order_id => @order_seller.id)
       flash[:success] = "您已购买该商品！"
     end
     redirect_to(@product)
@@ -101,16 +110,16 @@ class OrdersController < ApplicationController
   def add_items_in_shopping_cart_to_order
     lack_info = []
     if current_user.receiver_name.blank?
-      lack_info.append('receiver_name')
+      lack_info.append('收货人姓名')
     end
     if current_user.receiver_address.blank?
-      lack_info.append('receiver_name')
+      lack_info.append('收货人地址')
     end
     if current_user.receiver_name.blank?
-      lack_info.append('receiver_phone_number')
+      lack_info.append('收货人联系电话')
     end
     if lack_info != []
-      flash[:danger] = "Please add your " + lack_info.inject { |all_info, info| all_info + ', ' + info }
+      flash[:danger] = "请完善您的 " + lack_info.inject { |all_info, info| all_info + ', ' + info }
     else
       @shopping_cart = current_user.shopping_cart
       @order_buyer = Order.new(receiver_name: current_user.receiver_name,

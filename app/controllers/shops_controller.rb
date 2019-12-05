@@ -39,7 +39,12 @@ class ShopsController < ApplicationController
   end
 
   def destroy
-    @shop = Shop.find(params[:shop_id])
+    if params[:shop_id].blank?
+      @shop = Shop.find(params[:id])
+    else
+      @shop = Shop.find(params[:shop_id])
+    end
+
     user_name = @shop.user.name
     shop_name = @shop.name
     @shop.destroy

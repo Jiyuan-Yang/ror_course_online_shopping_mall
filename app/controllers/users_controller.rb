@@ -15,7 +15,11 @@ class UsersController < ApplicationController
   def create
     # deal with the POST request
     @user = User.new(user_params)
-
+    if @user.email.split('@')[1].downcase != 'jimstudio.com' and @user.character == 'administrator'
+      flash[:danger] = "要想注册成为管理员，则必须使用内部工作人员的域名为jimstudio.com的邮箱"
+      render("new")
+      return
+    end
     if @user.save
       if @user.character == "buyer"
         ShoppingCart.new(user_id: @user.id).save

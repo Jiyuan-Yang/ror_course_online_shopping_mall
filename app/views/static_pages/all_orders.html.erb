@@ -1,0 +1,28 @@
+<% provide(:title, '全部订单') %>
+<div class="container-fluid">
+  <table class="table table-striped">
+    <tr>
+      <th class="col-md-2">订单ID</th>
+      <th class="col-md-2">收货人名称</th>
+      <th class="col-md-2">创建时间</th>
+      <th class="col-md-2">状态</th>
+      <th class="col-md-2">总价</th>
+      <th class="col-md-2">操作</th>
+    </tr>
+    <% Order.all.each do |item| %>
+      <tr>
+        <td class="col-md-2"> <%= item.id %> </td>
+        <td class="col-md-2"> <%= item.receiver_name%> </td>
+        <td class="col-md-2"> <%= item.created_at %> </td>
+        <td class="col-md-2"> <%= item.status %> </td>
+        <td class="col-md-2"> <%= item.total_price %> </td>
+        <td class="col-md-2">
+          <%= link_to '<button class="btn btn-primary">查看详情</button>'.html_safe,
+                      item %>
+          <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe,
+                      item, method: :delete, data: {confirm: '您确定要删除此订单吗?'} %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

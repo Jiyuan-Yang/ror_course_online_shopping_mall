@@ -1,4 +1,24 @@
-<% User.all.each do |item| %>
-  <div><%= item.id %>|<%= item.name %>|<%= item.character %>|<%= link_to 'settings', edit_user_path(item.id) %>
-  |<%= link_to 'delete', user_path(item.id), method: :delete, data: {confirm: 'Are you sure'} %></div>
-<% end %>
+<% provide(:title, '全部用户') %>
+<div class="container-fluid">
+  <table class="table table-striped">
+    <tr>
+      <th class="col-md-2">用户ID</th>
+      <th class="col-md-3">用户名称</th>
+      <th class="col-md-3">用户邮箱</th>
+      <th class="col-md-4">操作</th>
+    </tr>
+    <% User.all.each do |item| %>
+      <tr>
+        <td class="col-md-2"> <%= item.id %> </td>
+        <td class="col-md-3"> <%= item.name %> </td>
+        <td class="col-md-3"> <%= item.email %> </td>
+        <td class="col-md-2">
+          <%= link_to '<button class="btn btn-primary">修改信息</button>'.html_safe,
+                      edit_user_path(item.id) %>
+          <%= link_to '<button class="btn btn-danger">删除</button>'.html_safe,
+                      item, method: :delete, data: {confirm: '您确定要删除此用户吗?'} %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
