@@ -6,11 +6,11 @@ class SearchResultsController < ApplicationController
   def search
     if params[:keyword].blank?
       if params.keys.count == 3
-        redirect_to(order_graph_path)
+        redirect_to(root_path)
         return
       else
         if @@pre_search_content.nil?
-          redirect_to(order_graph_path)
+          redirect_to(root_path)
         end
         @keyword = @@pre_search_content
       end
