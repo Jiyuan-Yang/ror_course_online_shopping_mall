@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :destroy]
-  before_action :correct_user_seller, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :show, :create, :destroy, :graph, :monthly]
+  before_action :correct_user_seller, only: [:new, :show, :create, :graph, :monthly]
 
   protect_from_forgery :except => :index
 
