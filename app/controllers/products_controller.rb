@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :monthly, :sales_ranking]
-  before_action :correct_user_seller, only: [:new, :create]
-  before_action :product_current_user?, only: [:monthly, :sales_ranking]
+  before_action :correct_user_seller, only: [:new, :create, :sales_ranking]
+  before_action :product_current_user?, only: [:monthly]
 
   protect_from_forgery :except => :index
 

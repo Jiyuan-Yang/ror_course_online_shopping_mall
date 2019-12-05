@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :logged_in_user, only: [:list_orders, :show, :destroy, :add_one_item_to_order, :add_items_in_shopping_cart_to_order]
-  before_action :correct_user, only: [:list_orders, :destroy]
+  before_action :logged_in_user, only: [:list_orders, :show, :destroy,
+                                        :add_one_item_to_order,
+                                        :add_items_in_shopping_cart_to_order,
+                                        :month_income, :year_income]
+  before_action :correct_user, only: [:list_orders, :destroy, :month_income, :year_income]
 
   protect_from_forgery :except => :index
 

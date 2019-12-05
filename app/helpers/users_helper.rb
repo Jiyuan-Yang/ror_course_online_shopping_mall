@@ -8,6 +8,9 @@ module UsersHelper
 
   def correct_user
     @user = User.all.find_by(id:params[:id])
+    if @user.nil?
+      @user = User.all.find_by(id:params[:user_id])
+    end
     if @user != current_user and current_user.character != 'administrator'
       flash[:danger] = "抱歉，您没有访问此页面的权限，您的访问请求被拒绝。"
       redirect_to(root_url)
@@ -23,6 +26,9 @@ module UsersHelper
 
   def correct_user_buyer
     @user = User.all.find_by(id:params[:id])
+    if @user.nil?
+      @user = User.all.find_by(id:params[:user_id])
+    end
     if !(@user == current_user and current_user.character == 'buyer') and current_user.character != 'administrator'
       flash[:danger] = "抱歉，您没有访问此页面的权限，您的访问请求被拒绝。"
       redirect_to(root_url)
@@ -38,6 +44,9 @@ module UsersHelper
 
   def correct_user_seller
     @user = User.all.find_by(id:params[:id])
+    if @user.nil?
+      @user = User.all.find_by(id:params[:user_id])
+    end
     if !(@user == current_user and current_user.character == 'seller') and current_user.character != 'administrator'
       flash[:danger] = "抱歉，您没有访问此页面的权限，您的访问请求被拒绝。"
       redirect_to(root_url)
