@@ -1,4 +1,4 @@
-# RoR Web Project in Course 2019
+# RoR Web Project in Database Course 2019
 
 ## Structure
 
@@ -86,7 +86,7 @@
     - 商品展示页：除了显示商品的信息之外，还要根据类别标签显示相关商品。
     - 注册类页面：嵌入选项(radio)以及下拉菜单
 - 实现报表功能
-    
+  
 
 ## Tips
 
