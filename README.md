@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a project for our course in the university which is made by Ruby on Rails. We've designed a general model for common online shopping settings, and made an implementation of those entities and their relationship as well as web pages made by HTML using embedded Ruby (erb). Due to the well-designed architecture powered by Rails, you could easily DIY your own functions and pages based on the model we've already made. We'll be glad if this project could help you get further understanding about the features of Ruby on Rails or even make come contirbutions in your development. If you have any questions or find any bugs in this project, just raise an issue and let us know.
+This is a project for our course in the university which is made by Ruby on Rails. We've designed a general model for common online shopping settings, and made an implementation of those entities and their relationship as well as web pages made by HTML using embedded Ruby (erb). Due to the well-designed architecture powered by Rails, you could easily DIY your own functions and pages based on the model we've already made. We'll be glad if this project could help you get further understanding about the features of Ruby on Rails or even make some contirbutions to your development. If you have any question or find any bug in this project, please raise an issue and let us know.
 
 ## Environment Preparation
 
@@ -29,7 +29,7 @@ to download `rvm`, if that fails, try
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ```
 
-and then
+and try the previous command again. Then
 
 ```
 source ~/.rvm/scripts/rvm
@@ -94,7 +94,7 @@ After that, everything is ready, type `rails server` to use this project. You ma
 
 Pay attention to the message of `Listening on`, and type this (for example, in my computer, I type `localhost:3000`) in your web browser and then you could view our project.
 
-When you first use this project, you make find some ERROR messages in your web browser like
+When you first use this project, you may find some ERROR messages in your web browser like
 
 ```
 ActiveRecord::PendingMigrationError
@@ -107,4 +107,4 @@ Just follow the instructions, in the directory of this project, type
 rails db:migrate 
 ```
 
-Then reload the pages and everything works well!
+Then reload the pages and everything will work well :-)
