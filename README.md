@@ -1,94 +1,110 @@
-# RoR Web Project in Database Course 2019
+# Online Shopping Mall Website Project
 
-## Structure
+## Introduction
 
-### Model
+This is a project for our course in the university which is made by Ruby on Rails. We've designed a general model for common online shopping settings, and made an implementation of those entities and their relationship as well as web pages made by HTML using embedded Ruby (erb). Due to the well-designed architecture powered by Rails, you could easily DIY your own functions and pages based on the model we've already made. We'll be glad if this project could help you get further understanding about the features of Ruby on Rails or even make come contirbutions in your development. If you have any questions or find any bugs in this project, just raise an issue and let us know.
 
-- User
-  - id: integer
-  - name: string
-  - email: string
-  - character: string (domin: buyer, seller, administrator)
-  - password (use the function from rails, add it later, as well as confirmation)
-- Shop
-  - id: integer
-  - name: string
-  - description: text
-  - rank: float             // add later
-  - **user_id**: integer
-- Product
-  - id: integer
-  - name: string
-  - description: text
-  - price: float
-  - picture_path: string    // add later
-  - type: string    // add later
-  - color: string    // add later
-  - size: string (use size format like x\*y\*z)    // add later
-  - **shop_id**: integer
-- ShoppingCartItem
-  - id: integer
-  - **product_id**: integer
-  - amount: integer
-  - total_price: float    // add later or may be not useful
-  - **shopping_cart_id**: integer \#\# test the ShoppingCart character case
-- ShoppingCart
-  - id: integer
-  - **user_id**: integer
-  - total_price: float    // add later or may be not useful
-- FavoriteItem
-  - id: integer    // this will be generate automatically
-  - **product_id**: integer
-  - **favorite_id**: integer 
-- Favorite
-  - id: integer    // this will be generate automatically
-  - **user_id**: integer
-- OrderItem
-  - id: integer    // this will be generate automatically
-  - **product_id**: integer
-  - amount: integer
-  - total_price: float    // add later
-  - **order_id**: integer
-- Order
-  - id: integer    // this will be generate automatically
-  - receiver_name: string
-  - receiver_address: string
-  - receiver_phone_number: string
-  - status: string
-  - order_time: date
-  - total_price: float
-  - **user_id**: integer
+## Environment Preparation
 
-### Controller
+The basic environment we used is `Ruby on Rails`, specifically,
 
-- StaticPages
-  - home
-  - about
-  - contact
+```
+Ruby version 2.5.1
+Rails version 5.2.3
+```
 
-## 第二阶段目标
+We recommend you to use this project on macOS, Linux or WSL (Windows Subsystem for Linux) on Windows. 
 
-初期基本已经完成，实现了实体及之间的基本关系的搭建。第二阶段预计使用一周半的时间完成。
+In order to get ready for this environment, it may be a better choice to install `rvm` first, a tool for ruby version controlling which could make it easier to manage different versions of `Ruby` and `Rails`.
 
-- 前期只有增加和查找操作，要增加更改和删除。
-- 对应地增加管理员用户的视图。
-- 增加各种完整性约束，主要是程序层面的，如果可以，增加数据库层面的。
-- 完善界面，这个要首先让页面内容人性化起来（比如要让购买者看到商品），先确保界面的结构，然后再让其美观，参考bootstrap的doc。
-- 增加报表功能。
+In the `Terminal` of macOS, Linux or WSL, type
 
-## 接下来的具体任务
-- 完善一些细节功能，比如类似于AJAX，异步刷新
-- 实现更严格的存取控制，防止直接路由的情况
-- 完善页面结构设计，这里需要更具体讨论，现在先准备出一个结构，然后需要什么再加入什么
-    - 主页：主页整体是上半部分为推荐商品，下半部分为商店及其热门商品。
-        - 要对产品增加销量和类别的属性列，便于在主页中根据类别进行索引，同时能够排序
-        - 主页正中央使用jQuery实现图片轮播
-    - 商品展示页：除了显示商品的信息之外，还要根据类别标签显示相关商品。
-    - 注册类页面：嵌入选项(radio)以及下拉菜单
-- 实现报表功能
-  
+```
+curl -L https://get.rvm.io | bash -s stable
+```
 
-## Tips
+to download `rvm`, if that fails, try
 
-- We use Ruby 2.5.1 and rails 5.2.x, check it first.
-- Execute `bundle install` and failed, remove the `Gemfile.lock` file and try again.
+```
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+```
+
+and then
+
+```
+source ~/.rvm/scripts/rvm
+```
+
+to activate `rvm`. Then use
+
+```
+rvm -v
+```
+
+if you see some messages like
+
+```
+rvm 1.29.9 (1.29.9) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+```
+
+the `rvm` is successfully installed on your device.
+
+Then you could use `rvm` to install `Ruby` and `Rails`.
+
+```
+rvm install 2.5.1
+rvm gemset create rails5
+rvm use 2.5.1@rails5 --default
+rvm install rails -v 5.2.3
+```
+
+After finishing all of those listed above, you are ready for a `Ruby on Rails` environment and could start to use this project. First, you have to use `cd` to change to the working directory of this project, 
+
+```
+cd Online_Shopping_Mall_RoR_Project/
+```
+
+The before we move on, use `bundle install` to install all the requirements (the gems). Notice that we use the source of gems in China, and in order to make this process faster, you could change it to the gem source of your country, in `Gemfile`, 
+
+```ruby
+# source 'https://rubygems.org'
+# git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+source 'https://gems.ruby-china.com'
+```
+
+change the source (or you could just use the default source).
+
+After that, everything is ready, type `rails server` to use this project. You may see messages like this in your terminal,
+
+```
+=> Booting Puma
+=> Rails 5.2.3 application starting in development 
+=> Run `rails server -h` for more startup options
+[8504] Puma starting in cluster mode...
+[8504] * Version 3.12.1 (ruby 2.5.1-p57), codename: Llamas in Pajamas
+[8504] * Min threads: 5, max threads: 5
+[8504] * Environment: development
+[8504] * Process workers: 2
+[8504] * Preloading application
+[8504] * Listening on tcp://localhost:3000
+[8504] Use Ctrl-C to stop
+[8504] - Worker 1 (pid: 8516) booted, phase: 0
+[8504] - Worker 0 (pid: 8515) booted, phase: 0
+```
+
+Pay attention to the message of `Listening on`, and type this (for example, in my computer, I type `localhost:3000`) in your web browser and then you could view our project.
+
+When you first use this project, you make find some ERROR messages in your web browser like
+
+```
+ActiveRecord::PendingMigrationError
+Migrations are pending. To resolve this issue, run: bin/rails db:migrate RAILS_ENV=development
+```
+
+Just follow the instructions, in the directory of this project, type
+
+```
+rails db:migrate 
+```
+
+Then reload the pages and everything works well!
