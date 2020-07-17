@@ -104,7 +104,7 @@ Migrations are pending. To resolve this issue, run: bin/rails db:migrate RAILS_E
 Just follow the instructions, in the directory of this project, type
 
 ```
-rails db:migrate 
+bin/rails db:migrate RAILS_ENV=development 
 ```
 
-Then reload the pages and everything will work well :-)
+Then reload the pages and everything will be fine :-)
